@@ -114,3 +114,7 @@ body {
     margin-left: 300px;
 }
 
+*:focus {
+    outline: none;
+    border: 1px solid rgb(150, 150, 150);
+}

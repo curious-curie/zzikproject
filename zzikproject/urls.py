@@ -25,4 +25,6 @@ from django.conf.urls.static import static
 urlpatterns = [
     path('admin/', admin.site.urls),  
     path('', zzikplace.views.index, name='index'),
+    path('login/', zzikplace.views.login, name='login'),
+    path('signup/', zzikplace.views.signup, name='signup'),
 ]

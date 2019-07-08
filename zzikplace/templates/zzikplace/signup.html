@@ -1,0 +1,28 @@
+{% extends 'base.html' %} 
+{% load staticfiles%}
+{% block content %}
+
+<link rel="stylesheet"  href="{% static 'zzikplace/accounts-style.css' %}"/>
+
+<div class = "login-box__wrapper">
+    <div class = "login-box">
+    {% comment %} 나중에 헤더 추가하기 {% endcomment %}
+    <form method="POST" action="#" class ="login-box__form">
+        {% csrf_token %}
+        이메일
+        <input name="username" autocomplete=off type="text" focus = "autofocus" placeholder = "예: zzikpl@gmail.com" value="" class = "signup-box__form__input">
+        닉네임
+        <input name="username" autocomplete=off type="text" focus = "autofocus" placeholder = "최대 8자(공백불가)" maxlength="8" class = "signup-box__form__input">
+        비밀번호
+        <input name="password" type="password" focus = "autofocus" placeholder = "비밀번호를 입력하세요." value "" class = "signup-box__form__input">
+        비밀번호 확인
+        <input name="password" type="password" focus = "autofocus" placeholder = "비밀번호를 다시 한번 입력하세요." value "" class = "signup-box__form__input">
+     
+        <input type="submit" value="회원가입" class = "login-box__form__submit">
+    </form>
+
+    </div>
+</div>
+
+
+{% endblock content %} 

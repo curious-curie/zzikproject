@@ -6,7 +6,6 @@ app_name = 'zzikplace'
 
 urlpatterns = [
     path('', views.index, name='index'),
-    path('join', views.join, name='join'),
-    path('login', views.login, name='login'),
-    path('show', views.show, name='show'),
+    path('signup', views.signup, name='signup'),
+    path('login', views.login, name='login'),   
 ]

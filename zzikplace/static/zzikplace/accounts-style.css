@@ -1,0 +1,69 @@
+@import url(//cdn.rawgit.com/hiun/NanumSquare/master/nanumsquare.css);
+
+
+.login-box__wrapper{
+    position: absolute;
+    top:20%;
+    left: 50%;
+    width: 480px;
+    margin-left: -240px;
+    background-color: white;
+    box-shadow:1px 1px 7px #cecece;
+}
+
+.login-box{
+    width: 360px;
+    margin: 70px 60px 60px 60px;
+}
+
+.login-box__form__input{
+    margin-top: 10px;
+    width:100%;
+    padding: .8em .5em;
+    border: 1px solid rgb(191, 191, 191);
+    background-color:rgb(250, 250, 250);
+    border-radius: 3px;
+
+}
+
+.login-box__form__submit{
+    width:100%;
+    margin-top: 20px;
+    padding: .5em .5em;
+    background-color:rgb(139, 182, 255);
+    opacity: 0.8;
+    border: none;
+    border-radius: 3px;
+    color: white;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.login-box__text{
+    text-align: center;
+    font-size: 16px;
+    margin-top: 20px;
+    text-decoration: none;
+}
+
+.login-box__form__text{
+    text-align: right;
+    font-size:15px;
+  
+
+}
+
+.signup-box__form__input{
+    width:100%;
+    padding: .8em .5em;
+    border: 1px solid rgb(191, 191, 191);
+    background-color:rgb(250, 250, 250);
+    border-radius: 3px;
+    margin-bottom: 20px;
+    margin-top: 5px;
+}
+
+*:focus {
+    outline: none;
+    border: 1px solid rgb(139, 182, 255);
+}
