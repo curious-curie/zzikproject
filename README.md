@@ -1,4 +1,4 @@
-#찍플 
+# 찍플 
 ### 당신의 인생샷을 위한 포토스팟 📸
 
 
@@ -6,7 +6,9 @@
 
 ##### 팀원: 안예지, 박성연, 김민기
 
-
+```
+git clone -b develop https://github.com/curious-curie/zzikproject/
+```
 
 #### Abstract
 
