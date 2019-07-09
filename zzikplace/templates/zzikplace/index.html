@@ -3,13 +3,30 @@
 
 
 {% block content %}
-
-
+<head>
+<title>Zzikpl</title>
 <link rel="stylesheet"  href="{% static 'zzikplace/style.css' %}"/>
+<script src="//code.jquery.com/jquery-3.3.1.min.js"></script>
+<script>
+</script>
+</head>
+
+<body>
+
+<div class = "slide">
+    <img class = "arrow" id="back" src="{% static 'zzikplace/img/back.png' %}">
+    <ul>
+    <li><img src="https://user-images.githubusercontent.com/47528556/60066135-3b980e00-9741-11e9-8017-45112bccd183.png" width = "100%"></li>
+    <li><img src="https://s27363.pcdn.co/wp-content/uploads/2018/10/One-Day-in-Hallstatt-1129x752.jpg.optimal.jpg" width = "100%"></li>
+    <li><img src="{% static 'zzikplace/img/2.jpg' %}" width = "100%"></li>
+    </ul>
+    <img class = "arrow" id="next" src="{% static 'zzikplace/img/next.png' %}">
+</div>
+
 
 <div class = "container">
-    <img src ="https://user-images.githubusercontent.com/47528556/60066135-3b980e00-9741-11e9-8017-45112bccd183.png" style="width:100%; margin-top: 2px;">
-    <div class = "centered"> <a class = "title">당신의 인생샷을 위한 포토스팟</a>
+    <div class = "centered"> 
+    <a class = "title">당신의 인생샷을 위한 포토스팟</a>
         <div class = "search-wrapper">
          <div class="input-holder">
           <input type="text" class="search-input" placeholder="어디로 갈까요?"/>
@@ -28,4 +45,42 @@
     </div>
 
 </div>
+
+</body>
+
+<script type="text/javascript">
+ $(document).ready(function(){
+     var imgs;
+     const img_count = 3;
+     var img_position = 1;
+     var width = $('.slide ul li').width();
+     var left = "-" + width;
+    
+
+     imgs= $(".slide ul");
+    
+     $('#back').click(function() {
+         back();
+     });
+     $('#next').click(function() {
+         next();
+     });   
+
+     function back(){
+         if(1<img_position){
+             imgs.animate({left: '+='+width}, 500);
+             img_position--;
+         }
+     }
+
+     function next(){
+         if(3>img_position){
+             imgs.animate({left: '-='+width}, 500);
+             img_position++;
+         }
+     }
+
+
+ });
+ </script>
 {% endblock content %} 
