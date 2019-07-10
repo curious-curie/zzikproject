@@ -21,10 +21,12 @@ from django.urls import path
 import zzikplace.views
 from django.conf import settings
 from django.conf.urls.static import static 
+import accounts.views
 
 urlpatterns = [
     path('admin/', admin.site.urls),  
     path('', zzikplace.views.index, name='index'),
+    path('accounts/', include('accounts.urls')),
     path('login/', zzikplace.views.login, name='login'),
-    path('signup/', zzikplace.views.signup, name='signup'),
+    path('accounts/signup/', zzikplace.views.signup, name='signup'),
 ]
