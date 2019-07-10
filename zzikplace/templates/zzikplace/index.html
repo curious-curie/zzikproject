@@ -16,8 +16,8 @@
 <div class = "slide">
     <img class = "arrow" id="back" src="{% static 'zzikplace/img/back.png' %}">
     <ul>
-    <li><img src="https://user-images.githubusercontent.com/47528556/60066135-3b980e00-9741-11e9-8017-45112bccd183.png" width = "100%"></li>
     <li><img src="https://s27363.pcdn.co/wp-content/uploads/2018/10/One-Day-in-Hallstatt-1129x752.jpg.optimal.jpg" width = "100%"></li>
+    <li><img src="https://user-images.githubusercontent.com/47528556/60066135-3b980e00-9741-11e9-8017-45112bccd183.png" width = "100%"></li>
     <li><img src="{% static 'zzikplace/img/2.jpg' %}" width = "100%"></li>
     </ul>
     <img class = "arrow" id="next" src="{% static 'zzikplace/img/next.png' %}">
@@ -53,9 +53,7 @@
      var imgs;
      const img_count = 3;
      var img_position = 1;
-     var width = $('.slide ul li').width();
-     var left = "-" + width;
-    
+    var w = window.innerWidth;
 
      imgs= $(".slide ul");
     
@@ -68,14 +66,14 @@
 
      function back(){
          if(1<img_position){
-             imgs.animate({left: '+='+width}, 500);
+             imgs.animate({left: '+='+w}, 500);
              img_position--;
          }
      }
 
      function next(){
          if(3>img_position){
-             imgs.animate({left: '-='+width}, 500);
+             imgs.animate({left: '-='+w}, 500);
              img_position++;
          }
      }
