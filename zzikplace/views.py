@@ -9,3 +9,6 @@ def login(request):
 
 def signup(request):
     return render(request, 'zzikplace/signup.html')
+
+def around(request):
+    return render(request, 'zzikplace/around.html')
