@@ -26,5 +26,6 @@ import accounts.views
 urlpatterns = [
     path('admin/', admin.site.urls),  
     path('', zzikplace.views.index, name='index'),
+    path('reviews/', include('zzikplace.urls')),
     path('accounts/', include('accounts.urls')),
 ]
