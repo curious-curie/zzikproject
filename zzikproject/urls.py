@@ -27,5 +27,4 @@ urlpatterns = [
     path('admin/', admin.site.urls),  
     path('', zzikplace.views.index, name='index'),
     path('accounts/', include('accounts.urls')),
-    path('accounts/signup/', zzikplace.views.signup, name='signup'),
 ]
