@@ -1,5 +1,12 @@
 @import url(https://fonts.googleapis.com/earlyaccess/nanumgothic.css);
 
+.floating-button{
+    z-index: 0;
+    left:500px;
+    border-radius: 50%;
+    text-align: center;
+    background-color: pink;
+}
 body {
     background-color: whitesmoke;
     margin : 0;
@@ -118,7 +125,7 @@ button:focus{
     top: 19px;
     height: 40px;
     border-radius: 15px;
-    margin-left: 300px;
+    margin-left: 5vw;
 }
 
 *:focus {

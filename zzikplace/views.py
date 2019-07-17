@@ -7,3 +7,5 @@ def index(request):
 def around(request):
     return render(request, 'zzikplace/around.html')
 
+def new(request):
+    return render(request, 'zzikplace/new.html')
