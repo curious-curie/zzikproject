@@ -24,6 +24,7 @@ class Review(models.Model):
         ('D', '밤'),
         ('E', '시간이 상관 없어요'),
     )
+    
     place = models.ForeignKey(Place, on_delete = models.CASCADE)
     tip = models.TextField()
     author = models.ForeignKey(User, null=True, on_delete= models.CASCADE)

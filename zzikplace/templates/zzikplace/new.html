@@ -51,19 +51,25 @@
 }
 
 </style>
+<link rel="stylesheet"  href="{% static 'zzikplace/new.css' %}"/>
 </head>
 <body>
 
 <div class="wrapper">
-<h2> 찍플 리뷰쓰기</h2>
+<h3> 찍플 리뷰쓰기</h3>
+
+<section>
+
 
 <h5>리뷰 쓸 장소 검색</h5>
+<div class = "search-wrap">
 <form onsubmit="searchPlaces(); return false;">
-                    <input type="text" placeholder= "장소명/지역" id="keyword" size="15"> 
+                    <input type="text" placeholder= "장소명/지역" id="keyword" size="15" style="width: 70%;"autocomplete = off> 
                     <button type="submit" class="start_search">검색하기</button> 
 </form>
+</div>
 <div class="map_wrap">
-    <div id="map" style="width:100%;height:100%;position:relative;overflow:hidden;"></div>
+    <div id="map" style="height:100%;position:relative;overflow:hidden;"></div>
 
     <div id="menu_wrap" class="bg_white">
         <div class="option">
@@ -74,38 +80,43 @@
     </div>
 </div>
 
+
 <p>
 <form action="/reviews/" method="POST"enctype="multipart/form-data" >
 {% csrf_token %}
 장소명 <input id = "selected_place_name" name = "place_name" readonly> <br>
 주소 <input id = "selected_place_addr" name = "place_addr" style="width: 400px;" readonly>
-<button type="button" class = "end_search" >ok</button>
+<input id = "place_x" name="place_x" style="display: none;">
+<input id = "place_y" name="place_y" style="display: none;">
+<button type="button" class = "end_search" >확인</button>
+</section>
 
-<p>
+<section>
 <h5>사진 잘 나오는 시간 추천</h5>
 <input type="checkbox" name="time" value="A">해 뜰 무렵 🌅
 <input type="checkbox" name="time" value="B">한낮☀️
 <input type="checkbox" name="time" value="C">해 질 무렵 🌇
 <input type="checkbox" name="time" value="D">밤 🌙️
 <input type="checkbox" name="time" value="E">시간이 상관 없어요 ⏰
-</p>
+</section>
 
-<p>
+<section> 
+<h5>이 장소에서 찍은 베스트컷을 올려주세요!</h5> 
+<input id = "pic_input" name="photo" type="file"/><br>
+//(사진 미리보기에 도전해봅시다)
+</section>
+
+<section>
 <h5>인생샷을 위한 꿀팁</h5>
 간단한 리뷰도 환영이에요! <br>
-<input type="text" style="width:500px; height: 300px;" name="tip">
-</p>
+<input id = "tip-box" type="text" style="width:500px; height: 200px;" autocomplete = off name="tip">
+</section>
 
-<p> 
-이 장소에서 찍은 베스트컷을 올려주세요! <br>
-<input name="photo" type="file" />
-</p>
-
-
-
-<button type="submit"> 작성 완료! </button>
+<button id = "submit-bt" type="submit" style="margin-top: 30px;"> 작성 완료! </button>
 </form>
+//엔터키치면 제출되는거 막아야함 
 </div>
+
 
 <script src="//code.jquery.com/jquery-3.3.1.min.js"></script>
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=64ecc30ef2f8d205d1168dea4d7ded6d&libraries=services"></script>
@@ -202,7 +213,7 @@ function displayPlaces(places) {
         // 마커와 검색결과 항목에 mouseover 했을때
         // 해당 장소에 인포윈도우에 장소명을 표시합니다
         // mouseout 했을 때는 인포윈도우를 닫습니다
-        (function(marker, title, address, address2) {
+        (function(marker, title, address, address2, x, y) {
             kakao.maps.event.addListener(marker, 'mouseover', function() {
                 displayInfowindow(marker, title);
             });
@@ -225,6 +236,8 @@ function displayPlaces(places) {
                 console.log(title);
                 console.log(address);
                 document.getElementById('selected_place_name').value = title;
+                document.getElementById('place_x').value = x;
+                document.getElementById('place_y').value = y;
                 if(address) {
                     document.getElementById('selected_place_addr').value = address; 
                 }
@@ -233,7 +246,7 @@ function displayPlaces(places) {
                 }
             };
 
-        })(marker, places[i].place_name, places[i].road_address_name, places[i].address_name);
+        })(marker, places[i].place_name, places[i].road_address_name, places[i].address_name, places[i].x, places[i].y);
 
         fragment.appendChild(itemEl);
     }

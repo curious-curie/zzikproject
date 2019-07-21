@@ -7,5 +7,5 @@ app_name = 'zzikplace'
 urlpatterns = [
     path('', views.index, name='index'),
     path('around', views.around, name = 'around'),
-    path('new', views.new, name='new')
+    path('new/', views.new, name='new')
 ]
