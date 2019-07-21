@@ -4,12 +4,12 @@ from django.db.models.signals import post_save  # 추가
 from django.dispatch import receiver  
 from django.utils import timezone
 
-class Profile(models.Model):   # 추가
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
-    email = models.CharField(max_length=30, blank=True)
+# class Profile(models.Model):   # 추가
+#     user = models.OneToOneField(User, on_delete=models.CASCADE)
+#     email = models.CharField(max_length=30, blank=True)
 
-    def __str__(self):   # 추가
-        return 'id=%d, user id=%d, email=%s' % (self.id, self.user.id, self.email)
+#     def __str__(self):   # 추가
+#         return 'id=%d, user id=%d, email=%s' % (self.id, self.user.id, self.email)
 
 class Place(models.Model):
     title = models.CharField(max_length=256)
@@ -45,11 +45,11 @@ class Save(models.Model):
     place = models.ForeignKey(Place, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
 
-@receiver(post_save, sender=User)
-def create_user_profile(sender, instance, created, **kwargs):  
-    if created:
-        Profile.objects.create(user=instance)
+# @receiver(post_save, sender=User)
+# def create_user_profile(sender, instance, created, **kwargs):  
+#     if created:
+#         Profile.objects.create(user=instance)
 
-@receiver(post_save, sender=User)
-def save_user_profile(sender, instance, **kwargs):  
-    instance.profile.save()
+# @receiver(post_save, sender=User)
+# def save_user_profile(sender, instance, **kwargs):  
+#     instance.profile.save()
