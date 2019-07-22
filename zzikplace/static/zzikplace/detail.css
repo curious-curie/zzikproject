@@ -1,0 +1,29 @@
+.container {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 3fr 1fr;
+    grid-gap: 2%;
+}
+
+.item {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+    border: 1px solid blue;
+}
+
+.place-info {
+    grid-column: 1;
+    grid-row: 1;
+}
+
+.review {
+    grid-column: 1;
+    grid-row: 2;
+}
+
+.sidebar {
+    grid-column: 2;
+    grid-row: 1/3;
+}

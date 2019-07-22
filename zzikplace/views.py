@@ -15,3 +15,6 @@ def new(request):
 def detail(request, id):
     place = Place.objects.get(id=id)
     return render(request, 'zzikplace/detail.html', {'place': place})
+
+def detail_test(request):
+    return render(request, 'zzikplace/detail.html')
