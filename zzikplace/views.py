@@ -14,6 +14,8 @@ def index(request):
 		address = request.POST['selectedAddress']
 		Place.objects.create(title=title, address=address)
 		return redirect('/zzikplace')
+		searchwords = SearchWord.objects.first()
+		return render(request, 'zzikplace/findplace.html',{'searchwords': searchwords})
 
 def findplace(request):
 	if request.method == "POST":
@@ -21,4 +23,4 @@ def findplace(request):
 		SearchWord.objects.all().delete()
 		SearchWord.objects.create(searchword=searchword)
 		searchwords = SearchWord.objects.first()
-		return render(request, 'zzikplace/findplace.html',{'searchwords': searchwords})
+	return render(request, 'zzikplace/findplace.html',{'searchwords': searchwords})
