@@ -1,8 +1,6 @@
 
 {% extends 'base.html' %} 
 {% load staticfiles%}
-
-
 {% block content %}
 
 <!DOCTYPE html>
@@ -82,7 +80,7 @@
 
 
 <p>
-<form action="/reviews/" method="POST"enctype="multipart/form-data" >
+<form action="/reviews/detail" method="POST"enctype="multipart/form-data" >
 {% csrf_token %}
 장소명 <input id = "selected_place_name" name = "place_name" readonly> <br>
 주소 <input id = "selected_place_addr" name = "place_addr" style="width: 400px;" readonly>

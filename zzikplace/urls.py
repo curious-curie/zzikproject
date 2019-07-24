@@ -8,6 +8,8 @@ urlpatterns = [
     path('', views.index, name='index'),
     path('around', views.around, name = 'around'),
     path('new/', views.new, name='new'),
-    path('<int:id>/', views.detail, name='detail'),
-    path('detailtest', views.detail_test, name='detail_test')
+    path(r'^detail/?(?P<id>\d+)?/?$', 'detail', name='detail'),  
+    path(r'^detail/$', 'detail', name='calculate'),
 ]
+
+path('<int:id>/', views.detail, name='detail'),
