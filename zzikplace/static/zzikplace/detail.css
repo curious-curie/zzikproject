@@ -1,0 +1,149 @@
+
+
+.container {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 75% 25%;
+    grid-column-gap: 2%;
+    grid-row-gap: 0;
+    color: rgb(63, 63, 63);
+    grid-template-rows: minmax(100px, 400px);
+}
+
+.item {
+    background-color: white;
+    border: 1px solid gray;
+}
+
+.place-info {
+    margin-top: 30px;
+    padding-top: 30px;
+    padding-left: 5px;
+    padding-right: 10px;
+    grid-column: 1;
+    grid-row: 1;
+    line-height: 1.7em;
+}
+
+.review {
+    grid-column: 1;
+    grid-row: 2;
+}
+
+.sidebar {
+    margin-top: 30px;
+    grid-column: 2;
+    grid-row: 1/3;
+    display: flex;
+    flex-direction: column;
+}
+
+.info-bar{
+    width: 100%;
+    text-align: left;
+    margin-bottom: 0px;
+}
+#title{
+    padding-left: 20px;
+    font-size: 2vw;
+    font-weight: 600;
+}
+
+#address{
+    font-size: 1.3vw;
+    padding-left: 20px;
+    text-align: left;
+    margin-bottom: 20px;
+}
+
+#view{
+    color: gray;
+    padding-left: 20px;
+    font-size: 1vw;
+}
+
+#buttons{
+    font-size: 2.5vw;
+    height: 60px;
+    float: right;
+}
+
+#buttons i{
+    margin-right: 10px;
+}
+
+.photo-wrapper{
+    width: 100%;
+    margin-top: 10px;
+    margin-bottom: 0px;
+    margin-left: 1%;
+    overflow: hidden;
+}
+
+.photo-wrapper ul{
+    position: relative;
+    padding: 0px 0px 0px 0px;
+    list-style-type: none;
+    overflow: hidden;
+    white-space:nowrap;
+}
+
+.photo-wrapper li{
+    float: left;
+    width: 32.5%;
+    margin-right: 5px;
+}
+
+.photo-wrapper img{
+    width: 100%;
+   
+}
+
+.map-container{
+    display: block;
+    padding: 10px;
+    width: 100%;
+    height:20vw;
+    margin-bottom: 10px;
+}
+
+.around-container{
+    margin-top: 20px;
+    padding: 10px;
+    display: grid;
+    grid-auto-columns: 2;
+    grid-gap: 1%;
+    line-height: 1em;
+}
+
+.around-container span{
+    float: left;
+    margin-left: 10px;
+    font-weight: 600;
+    width: 100%;
+    text-align: left;
+}
+
+.around-container div{
+    margin-top: 10px;
+}
+
+#around-photo{
+    background-color: pink;
+    width: 8vw;
+    height: 8vw;
+}
+
+#around-info{
+    padding-top: 10px;
+    margin-left: 5px;
+    width: 8vw;
+}
+
+#around-name{
+    font-size: 1.5vw;
+}
+#around-address{
+    font-weight: normal;
+    font-size: 0.9vw;
+}
