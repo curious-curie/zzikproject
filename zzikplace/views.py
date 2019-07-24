@@ -28,3 +28,11 @@ def detail(request, id=None):
         place = Place.objects.get(id=id)
         return render(request, 'zzikplace/detail.html', {'place': place})
 
+
+def add(request, id=None):
+    if id:
+        place = Place.objects.get(id=id)
+        return render(request, 'zzikplace/add.html', {'place' : place})
+    else:
+        return render(request, 'zzikplace/new.html')
+
