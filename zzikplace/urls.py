@@ -9,5 +9,6 @@ urlpatterns = [
     path('around', views.around, name = 'around'),
     path('new/', views.new, name='new'),
     path('detail/', views.detail, name='detail'),
+    path('detail/<int:id>', views.detail, name='detail'),
 ]
 

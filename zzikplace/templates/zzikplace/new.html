@@ -66,7 +66,7 @@
                     <button type="submit" class="start_search">검색하기</button> 
 </form>
 </div>
-<div class="map_wrap">
+<div class="map_wrap" id="map_wrap">
     <div id="map" style="height:100%;position:relative;overflow:hidden;"></div>
 
     <div id="menu_wrap" class="bg_white">
@@ -79,14 +79,13 @@
 </div>
 
 
-<p>
 <form action="/reviews/detail/" method="POST" enctype="multipart/form-data" >
 {% csrf_token %}
 장소명 <input id = "selected_place_name" name = "place_name" readonly> <br>
 주소 <input id = "selected_place_addr" name = "place_addr" style="width: 400px;" readonly>
 <input id = "place_x" name="place_x" style="display: none;">
 <input id = "place_y" name="place_y" style="display: none;">
-<button type="button" class = "end_search" >확인</button>
+<button style="display:none;" type="button" class = "end_search" >확인</button>
 </section>
 
 <section>
@@ -242,6 +241,8 @@ function displayPlaces(places) {
                 else {
                     document.getElementById('selected_place_addr').value = address2; 
                 }
+
+                document.getElementById('map_wrap').style.display = 'none';
             };
 
         })(marker, places[i].place_name, places[i].road_address_name, places[i].address_name, places[i].x, places[i].y);
