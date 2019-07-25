@@ -21,7 +21,8 @@ def detail(request, id=None):
         time = request.POST['time']
         place, is_place = Place.objects.get_or_create(address=address, title=title)
         id = place.id
-        Review.objects.create(place_id=id, tip=tip, photo=photo, time=time, author=request.user)
+        review = Review.objects.create(place_id=id, tip=tip, photo=photo, time=time, author=request.user)
+        review.save()
         return render(request, 'zzikplace/detail.html', {'place': place})
 
     elif request.method == "GET":
