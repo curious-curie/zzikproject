@@ -37,3 +37,7 @@ def add(request, id=None):
     else:
         return render(request, 'zzikplace/new.html')
 
+def places(request):
+    places = Place.objects.all()
+    return render(request, 'zzikplace/places.html', { 'places': places })
+

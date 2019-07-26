@@ -100,7 +100,7 @@
 <section> 
 <h5>이 장소에서 찍은 베스트컷을 올려주세요!</h5> 
 <input id = "pic_input" name="photo" type="file"/><br>
-//(사진 미리보기에 도전해봅시다)
+    <img id = "pic" src="#" width="300px"/>
 </section>
 
 <section>
@@ -377,6 +377,20 @@ $(document).ready(function(){
     });
 
 })
+
+function readURL(input) {
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
+        reader.onload = function(e) {
+            $('#pic').attr('src', e.target.result);
+        }
+        reader.readAsDataURL(input.files[0]);
+    }
+}
+
+$("#pic_input").change(function() {
+    readURL(this);
+});
 
 </script>
 </body>

@@ -8,7 +8,7 @@
 <head>
 <link rel="stylesheet"  href="{% static 'zzikplace/new.css' %}"/>
 </head>
-<body>
+<body style="padding: 30px;">
 
 <div class="wrapper">
 <h3> 찍플 리뷰쓰기</h3>
@@ -33,7 +33,7 @@
 <section> 
 <h5>이 장소에서 찍은 베스트컷을 올려주세요!</h5> 
 <input id = "pic_input" name="photo" type="file"/><br>
-//(사진 미리보기에 도전해봅시다)
+    <img id = "pic" src="#" width="300px"/>
 </section>
 
 <section>
@@ -44,10 +44,25 @@
 
 <button id = "submit-bt" type="submit" style="margin-top: 30px;"> 작성 완료! </button>
 </form>
-//엔터키치면 제출되는거 막아야함 
 </div>
 
+<script src="//code.jquery.com/jquery-3.3.1.min.js"></script>
+<script>
+function readURL(input) {
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
+        reader.onload = function(e) {
+            $('#pic').attr('src', e.target.result);
+        }
+        reader.readAsDataURL(input.files[0]);
+    }
+}
 
+$("#pic_input").change(function() {
+    readURL(this);
+});
+
+</script>
 </body>
 </html>
 {% endblock content %} 
