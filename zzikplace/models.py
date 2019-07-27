@@ -14,6 +14,8 @@ from django.utils import timezone
 class Place(models.Model):
     title = models.CharField(max_length=256)
     address = models.TextField()
+    x = models.FloatField(default = None)
+    y = models.FloatField(default = None)
     saved_users = models.ManyToManyField(User, blank=True, related_name='places_saved', through='Save')
     
 class Review(models.Model):

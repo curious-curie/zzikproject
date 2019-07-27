@@ -16,10 +16,12 @@ def detail(request, id=None):
     if request.method == "POST":
         title = request.POST['place_name']
         address = request.POST['place_addr']
+        x = request.POST['place_x']
+        y = request.POST['place_y']
         tip = request.POST['tip']
         photo = request.FILES.get('photo', False)
         time = request.POST['time']
-        place, is_place = Place.objects.get_or_create(address=address, title=title)
+        place, is_place = Place.objects.get_or_create(address=address, title=title, x= x, y= y)
         id = place.id
         review = Review.objects.create(place_id=id, tip=tip, photo=photo, time=time, author=request.user)
         review.save()
