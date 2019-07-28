@@ -71,31 +71,32 @@
 .review_wrapper {
     display: grid;
     position: relative;
-    grid-template-columns: 49% 49%;
+    width: 100%;
+    grid-template-columns: 50% 50%;
+    /* grid-column-gap: 2%;  */
     grid-auto-rows: minmax(min-content, max-content);
-    grid-column-gap: 2%; 
     grid-row-gap: 10px;
-    background-color: blue;
-    margin-left: 15px;
-    margin-right: 15px; 
 }
 
 .each_review {
-    height: 300px;
-    width: 100%;
+    height: 340px;
+    width: 90%;
+    margin:12px auto;
     border: black;
 }
 
-#review_photo {
+.review_photo {
     background-color: pink;
     width: 100%;
     height: 200px;
+    margin-bottom: 10px;
 }
 
-#review_content {
+.review_content {
     height: 100px;
     width: 100%;
     background-color: gray;
+    margin-bottom: 10px;
 }
 
 
