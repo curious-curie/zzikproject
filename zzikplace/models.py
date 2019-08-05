@@ -45,6 +45,9 @@ class Save(models.Model):
     place = models.ForeignKey(Place, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
 
+class SearchWord(models.Model):
+    searchword = models.CharField(max_length=30, blank=True)
+
 # @receiver(post_save, sender=User)
 # def create_user_profile(sender, instance, created, **kwargs):  
 #     if created:

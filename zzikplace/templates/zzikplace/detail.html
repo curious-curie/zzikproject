@@ -4,7 +4,9 @@
 
 <head>
 <!-- Place your kit's code here -->
+    <script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
     <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
     <link rel="stylesheet"  href="{% static 'zzikplace/detail.css' %}"/>
 </head> 
 
@@ -20,7 +22,7 @@
     
         {% comment %} <a href="/reviews/{{ place.id }}/save">        <!--view-->
           {% if product in user.places_saved.all %} {% endcomment %}
-            <i class="fas fa-bookmark"></i>
+            <i class="fas fa-bookmark" style="margin-right: 10px;"></i>
           {% comment %} {% else %}
             <i class="far fa-bookmark"></i>
           {% endif %}
@@ -37,8 +39,13 @@
             <li><img src="{% static 'zzikplace/img/main1.jpg' %}"></li>
             <li><img src="{% static 'zzikplace/img/main.jpg' %}"></li>
          </ul>
+         <button class = "more-button" style="color:white;">사진 더보기</button>
         </div> 
-     </div>
+     
+         <div class = "chart-wrap" style="width: 250px; height: 70px;">
+        {% comment %} <canvas id="timeChart" style="opacity: 0.7;"></canvas> {% endcomment %}
+        </div> 
+      </div>
     </div>
 
     <div class="item review">
@@ -60,7 +67,7 @@
             </span>
 
             <span id = "around-info">
-            <a id = "around-name"> place.name </a>
+            <a id = "around-name"> place.title </a>
             <a id = "around-address">place.address</a>
             </span>
             </div>
@@ -71,7 +78,7 @@
             </span>
 
             <span id = "around-info">
-            <a id = "around-name"> place.name </a>
+            <a id = "around-name"> place.title </a>
             <a id = "around-address">place.address</a>
             </span>
             </div>
@@ -82,6 +89,55 @@
     </div>
 
 </div>
+<script>
+$(".more-button").click(function() {
+
+    var scrollPosition = $("#review").offset().top;
+
+    $('html,body').animate({
+        scrollTop: scrollPosition
+    }, 500);
+});
+
+
+
+var ctx = document.getElementById('timeChart').getContext('2d');
+var timeChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+        labels: ['해뜰무렵', '한낮', '해질무렵', '️밤', '상관없음'],
+        datasets: [{
+            backgroundColor: ['f1d4d4', 'salmon', 'lightpink', 'salmon','gray'],
+            data: [1,2,3,4,5]
+        }]
+    },
+    
+    options: {
+
+        scales: {
+          xAxes: [{
+            barPercentage: 0.6,
+            categoryPercentage: 0.7,
+            ticks: {
+            fontSize: 10
+            }
+          }],
+          yAxes: [{
+            barThickness: 2,
+            display: false,
+             ticks: {
+                beginAtZero: true
+            }
+          }],
+        },
+        legend: {
+            display: false,
+        }
+        
+    }
+});
+</script>
+
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=64ecc30ef2f8d205d1168dea4d7ded6d&libraries=services"></script>
 <script>
 var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
@@ -111,10 +167,10 @@ geocoder.addressSearch('부산광역시 해운대구 우동 동백로 52', funct
         });
 
         // 인포윈도우로 장소에 대한 설명을 표시합니다
-        var infowindow = new kakao.maps.InfoWindow({
-            content: '<div style="width:150px;text-align:center;padding:6px 0;"> place.name </div>'
-        });
-        infowindow.open(map, marker);
+        //var infowindow = new kakao.maps.InfoWindow({
+        //    content: '<div style="width:150px;text-align:center;padding:6px 0;"> place.name </div>'
+        // });
+        // infowindow.open(map, marker);
 
         // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
         map.setCenter(coords);

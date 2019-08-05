@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.views.generic.base import TemplateView
-from .models import Place, Review
+from .models import Place, Review, SearchWord
 from django.contrib.auth.models import User
 
 def index(request):
@@ -28,4 +28,11 @@ def detail(request):
         place = Place.objects.get(id=id)
         return render(request, 'zzikplace/detail.html', {'place': place})
 
-        
+def findplace(request):
+	if request.method == "POST":
+		searchword = request.POST['search-word']
+		SearchWord.objects.all().delete()
+		SearchWord.objects.create(searchword=searchword)
+		searchwords = SearchWord.objects.first()
+	return render(request, 'zzikplace/findplace.html',{'searchwords': searchwords})
+

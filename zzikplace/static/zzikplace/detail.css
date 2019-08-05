@@ -1,4 +1,21 @@
 
+.more-button{
+    position: absolute;
+    left: 62%;
+    top: 32%;
+    padding: 2px 10px 2px;
+    border-radius: 20px;
+    color: white;
+    font-weight: 400;
+    font-size: 1.2vw;
+    background-color: black;
+    opacity: 0.5;
+    border: none;
+}
+
+.more-button:hover{
+    opacity: 0.8;
+}
 
 .container {
     width: 100%;
@@ -12,7 +29,6 @@
 
 .item {
     background-color: white;
-    border: 1px solid gray;
 }
 
 .place-info {
@@ -66,10 +82,12 @@
     font-size: 2.5vw;
     height: 60px;
     float: right;
+    margin-right: 15px;
 }
 
+
 #buttons i{
-    margin-right: 10px;
+    margin-right: 25px;
 }
 
 .photo-wrapper{
@@ -143,7 +161,12 @@
 #around-name{
     font-size: 1.5vw;
 }
+
 #around-address{
     font-weight: normal;
     font-size: 0.9vw;
+}
+
+.chart-wrap{
+    opacity: 0.8;
 }
