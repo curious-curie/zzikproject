@@ -1,6 +1,7 @@
 from django.shortcuts import render
+from django.shortcuts import redirect
 from django.views.generic.base import TemplateView
-from .models import Place, Review
+from .models import Place, Review, Like, Save
 from django.contrib.auth.models import User
 
 def index(request):
@@ -45,4 +46,24 @@ def add(request, id=None):
 def places(request):
     places = Place.objects.all()
     return render(request, 'zzikplace/places.html', { 'places': places })
+
+def place_save(request, pk):
+    place = Place.objects.get(id = pk)
+    save_list = place.save_set.filter(user_id = request.user.id)
+    if save_list.count() > 0:
+        place.save_set.get(user_id = request.user.id).delete()
+    else:
+        Save.objects.create(user_id = request.user.id, place_id = place.id)
+    next = request.META['HTTP_REFERER']
+    return redirect (next)
+
+def review_like(request, pk):
+    review = Review.objects.get(id = pk)
+    like_list = review.like_set.filter(user_id = request.user.id)
+    if like_list.count() > 0:
+        review.like_set.get(user_id = request.user.id).delete()
+    else:
+        Like.objects.create(user_id = request.user.id, review_id = review.id)
+    next = request.META['HTTP_REFERER']
+    return redirect (next)
 

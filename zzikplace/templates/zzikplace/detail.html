@@ -19,7 +19,17 @@
             <span id = "title">{{ place.title }}  </span> 
             <span id = "view"> <i class="fas fa-eye"></i> 조회수<i class="fas fa-bookmark" style="margin-left: 10px;"></i> 저장수</span> 
             <span id = "buttons">
-                <i class="fas fa-bookmark" style="margin-right: 10px;"></i>
+    {% comment %}  {% endcomment %}
+                {% if user.is_authenticated %}
+                    <a href="/reviews/detail/{{ place.id }}/save">
+                        {% if place in user.places_saved.all %}
+                            <i class="fas fa-bookmark" style="margin-right: 10px;"></i>
+                        {% else %}
+                            <i class="far fa-bookmark" style="margin-right: 10px;"></i>
+                        {% endif %}
+                    </a>
+                {% endif %}
+    {% comment %}  {% endcomment %}
                 <a href="add"> <i class="fas fa-pen"></i> </a>    
             </span>
         </div>
@@ -50,20 +60,21 @@
         </div>
 
         <div class="review_wrapper"> 
+        {% comment %} {% for review in reviews %} {% endcomment %}
             <div class="each_review">
                 <div class="review_photo">photo</div>
-                <div class="review_content">content</div>
-                <button style="float: left; font-size: 2px"> 좋아요 </button>
-                <p style="float: right; font-size: 1px"> {review.author}</p>
+                <div class="review_content">{ review.tip }</div>
+                <a href="reviews/detail/{{ review.id }}/like" style="float: left; font-size: 2px"> 좋아요 </a>
+                <p style="float: right; font-size: 1px"> 작성자: { review.author }</p>
             </div>
 
             <div class="each_review">
                 <div class="review_photo">photo</div>
-                <div class="review_content">content</div>
-                <button style="float: left; font-size: 2px"> 좋아요 </button>
-                <p style="float: right; font-size: 1px"> 작성자 : {review.author}</p>
-            </div> 
-
+                <div class="review_content">{ review.tip }</div>
+                <a href="reviews/detail/{{ review.id }}/like" style="float: left; font-size: 2px"> 좋아요 </a>
+                <p style="float: right; font-size: 1px"> 작성자: { review.author }</p>
+            </div>
+        {% comment %} {% endfor %} {% endcomment %}
         </div>
 
     </div>
