@@ -21,8 +21,11 @@ def detail(request, id=None):
         tip = request.POST['tip']
         photo = request.FILES.get('photo', False)
         time = request.POST['time']
+        tag_content = request.POST['tag_content']
         place, is_place = Place.objects.get_or_create(address=address, title=title, x= x, y= y)
         id = place.id
+        place.save()
+        place.tag_save()
         review = Review.objects.create(place_id=id, tip=tip, photo=photo, time=time, author=request.user)
         review.save()
         return render(request, 'zzikplace/detail.html', {'place': place})
