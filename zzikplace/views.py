@@ -15,7 +15,7 @@ def my(request):
 def new(request):
     return render(request, 'zzikplace/new.html')
 
-def detail(request):
+def detail(request, id=None):
     if request.method == "POST":
         title = request.POST['place_name']
         address = request.POST['place_addr']

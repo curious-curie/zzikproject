@@ -44,13 +44,6 @@
 
 
     <div class="item review">
-<<<<<<< HEAD
-    {% for c in place.review_set.all %}
-        <p> {{ c.tip }} </p>
-    {% endfor %}
-    </div>
-
-=======
 
         <div class="review_infobar">
             <span id="review_number"> 리뷰({{place.review_set.count}}) </span>
@@ -65,18 +58,11 @@
                 <div class="review_content">{{ review.tip }}</div>
                 <div>
                 <button style="float: left; font-size: 2px"> 좋아요 </button>
-                <a style="float: right; font-size: 1px"> {{ review.author }}</a>
+                <a style="float: right; font-size: 1px; margin-right: 5px;"> by. {{ review.author }}</a>
                 </div>
             </div>
             {% endfor %}
-
-            <div class="each_review">
-                <div class="review_photo">photo</div>
-                <div class="review_content">content</div>
-                <button style="float: left; font-size: 2px"> 좋아요 </button>
-                <p style="float: right; font-size: 1px"> 작성자 : {review.author}</p>
-            </div> 
-
+            
         </div>
 
     </div>
@@ -85,7 +71,6 @@
 
 
 
->>>>>>> cae40394784a461f913c39e31259bd4de3dfb47d
     <div class="item sidebar">
         <div class="map-container">
             <div id="map" style="width:100%;height:20vw;"></div>
