@@ -24,7 +24,7 @@
     grid-column-gap: 2%;
     grid-row-gap: 2%;
     color: rgb(63, 63, 63);
-    grid-template-rows: minmax(100px, max-content);
+    grid-template-rows: minmax(100px, 400px);
 }
 
 .item {
@@ -44,7 +44,6 @@
 .review {
     grid-column: 1;
     grid-row: 2;
-    padding-bottom: 50px;
 }
 
 /*************** Yeji ****************/
@@ -77,33 +76,26 @@
     /* grid-column-gap: 2%;  */
     grid-auto-rows: minmax(min-content, max-content);
     grid-row-gap: 10px;
-    margin-bottom: 50px;
 }
 
-
 .each_review {
+    height: 340px;
     width: 90%;
     margin:12px auto;
-    border: 1px solid lightgray;
-    border-radius: 15px;
-    padding: 12px;
+    border: black;
 }
 
 .review_photo {
+    background-color: pink;
     width: 100%;
-    margin-bottom: 16px;
-}
-
-.review_photo img {
-    width: 80%;
-    position: relative;
+    height: 200px;
+    margin-bottom: 10px;
 }
 
 .review_content {
-    padding: 12px;
-    position: relative;
-    min-height: 100px;
+    height: 100px;
     width: 100%;
+    background-color: gray;
     margin-bottom: 10px;
 }
 

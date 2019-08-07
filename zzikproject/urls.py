@@ -26,7 +26,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),  
     path('', zzikplace.views.index, name='index'),
     path('accounts/', include('accounts.urls')),
-    path('zzikplace/', include('zzikplace.urls')),
+    path('reviews/', include('zzikplace.urls')),
 ]
 
 

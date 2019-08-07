@@ -11,7 +11,6 @@
 </head> 
 
 <body>
-
 <div class="container">
 
     <div class="item place-info">
@@ -20,9 +19,9 @@
             <span id = "title">{{ place.title }}  </span> 
             <span id = "view"> <i class="fas fa-eye"></i> 조회수<i class="fas fa-bookmark" style="margin-left: 10px;"></i> 저장수</span> 
             <span id = "buttons">
-    {% comment %}  {% endcomment %}
+    
                 {% if user.is_authenticated %}
-                    <a href="/reviews/detail/{{ place.id }}/save">
+                    <a href="/reviews/detail/{{ place.id }}/save/">
                         {% if place in user.places_saved.all %}
                             <i class="fas fa-bookmark" style="margin-right: 10px;"></i>
                         {% else %}
@@ -30,7 +29,7 @@
                         {% endif %}
                     </a>
                 {% endif %}
-    {% comment %}  {% endcomment %}
+    
                 <a href="add"> <i class="fas fa-pen"></i> </a>    
             </span>
         </div>
@@ -69,7 +68,6 @@
                 <p style="float: right; font-size: 1px"> 작성자: { review.author }</p>
             </div>
 
-            {% for review in place.review_set.all %}
             <div class="each_review">
                 <div class="review_photo">photo</div>
                 <div class="review_content">{ review.tip }</div>
@@ -117,7 +115,7 @@
 <script>
 $(".more-button").click(function() {
 
-    var scrollPosition = $(".review_wrapper").offset().top;
+    var scrollPosition = $("#review").offset().top;
 
     $('html,body').animate({
         scrollTop: scrollPosition

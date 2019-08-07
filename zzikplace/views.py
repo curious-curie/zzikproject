@@ -1,8 +1,3 @@
-<<<<<<< HEAD
-from django.shortcuts import render, redirect
-from django.views.generic.base import TemplateView
-from .models import Place, SearchWord
-=======
 from django.shortcuts import render
 from django.shortcuts import redirect
 from django.views.generic.base import TemplateView
@@ -11,13 +6,9 @@ from django.contrib.auth.models import User
 
 def index(request):
     return render(request, 'zzikplace/index.html')
->>>>>>> curie
 
 def around(request):
     return render(request, 'zzikplace/index.html')
-
-def my(request):
-    return render(request, 'zzikplace/my.html')
 
 def new(request):
     return render(request, 'zzikplace/new.html')
@@ -32,7 +23,7 @@ def detail(request, id=None):
         photo = request.FILES.get('photo', False)
         time = request.POST['time']
         tag_content = request.POST['tag_content']
-        place, is_place = Place.objects.get_or_create(address=address, tag_content = tag_content, title=title, x= x, y= y)
+        place, is_place = Place.objects.get_or_create(address=address, title=title, x= x, y= y)
         id = place.id
         place.save()
         place.tag_save()
@@ -51,6 +42,11 @@ def add(request, id=None):
         return render(request, 'zzikplace/add.html', {'place' : place})
     else:
         return render(request, 'zzikplace/new.html')
+
+def my(request):
+    places = Place.objects.all()
+    return render(request, 'zzikplace/my.html', { 'places': places })
+
 
 def places(request):
     places = Place.objects.all()
@@ -75,23 +71,3 @@ def review_like(request, pk):
         Like.objects.create(user_id = request.user.id, review_id = review.id)
     next = request.META['HTTP_REFERER']
     return redirect (next)
-
-def index(request):
-	if request.method == "GET":
-		return render(request, 'zzikplace/index.html')
-	
-	elif request.method == "POST":
-		title = request.POST['selectedName']
-		address = request.POST['selectedAddress']
-		Place.objects.create(title=title, address=address)
-		return redirect('/zzikplace')
-		searchwords = SearchWord.objects.first()
-		return render(request, 'zzikplace/findplace.html',{'searchwords': searchwords})
-
-def findplace(request):
-	if request.method == "POST":
-		searchword = request.POST['search-word']
-		SearchWord.objects.all().delete()
-		SearchWord.objects.create(searchword=searchword)
-		searchwords = SearchWord.objects.first()
-	return render(request, 'zzikplace/findplace.html',{'searchwords': searchwords})
