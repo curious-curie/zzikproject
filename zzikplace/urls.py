@@ -13,7 +13,10 @@ urlpatterns = [
     path('detail/', views.detail, name='detail'),
     path('detail/<int:id>/', views.detail, name='detail'),
     path('detail/<int:id>/add/', views.add, name='add'),
+<<<<<<< HEAD
     path('detail/add/', views.add, name='add'),
+=======
+>>>>>>> curie
     path('detail/<int:pk>/save/', views.place_save, name='save'),
     path('detail/<int:pk>/like/', views.review_like, name='like'),
 ]
