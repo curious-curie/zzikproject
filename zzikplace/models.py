@@ -22,6 +22,7 @@ class Place(models.Model):
     tag_set = models.ManyToManyField('Tag', blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+    place_hit = models.PositiveIntegerField(default=0)
     
     class Meta:
         ordering = ['-created_at']
@@ -35,6 +36,11 @@ class Place(models.Model):
         for t in tags:
             tag, tag_created = Tag.objects.get_or_create(name=t)
             self.tag_set.add(tag)
+    
+    @property
+    def update_counter(self):
+        self.place_hit = self.place_hit + 1
+        self.save()
 
 class Tag(models.Model):
     name = models.CharField(max_length=140, unique=True)
