@@ -1,0 +1,73 @@
+
+{% extends 'base.html' %} 
+{% load staticfiles%}
+{% block content %}
+
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet"  href="{% static 'zzikplace/new.css' %}"/>
+</head>
+<body style="padding: 30px;">
+
+<div class="wrapper">
+<h3> 찍플 리뷰쓰기</h3>
+
+<section>
+
+<form action="/reviews/detail/" method="POST" enctype="multipart/form-data" >
+{% csrf_token %}
+장소명 <input id = "selected_place_name" name = "place_name" value = "{{ place.title }}" readonly> <br>
+주소 <input id = "selected_place_addr" name = "place_addr" style="width: 400px;" value = "{{ place.address }}" readonly>
+</section>
+
+<section>
+<h5>사진 잘 나오는 시간 추천</h5>
+<input type="checkbox" name="time" value="A">해 뜰 무렵 🌅
+<input type="checkbox" name="time" value="B">한낮☀️
+<input type="checkbox" name="time" value="C">해 질 무렵 🌇
+<input type="checkbox" name="time" value="D">밤 🌙️
+<input type="checkbox" name="time" value="E">시간이 상관 없어요 ⏰
+</section>
+
+<section> 
+<h5>이 장소에서 찍은 베스트컷을 올려주세요!</h5> 
+<input id = "pic_input" name="photo" type="file"/><br>
+    <img id = "pic" src="#" width="300px"/>
+</section>
+
+<section>
+<h5>인생샷을 위한 꿀팁</h5>
+간단한 리뷰도 환영이에요! <br>
+<input id = "tip-box" type="text" style="width:500px; height: 200px;" autocomplete = off name="tip">
+</section>
+
+<section>
+<h5> 해시태그 </h5>
+<input id = "tip-box" name = "tag_content" type="text" style="width:500px; height: 50px;" placeholder = "예시: #카페 #커플 #이태원" autocomplete = off >
+
+
+<button id = "submit-bt" type="submit" style="margin-top: 30px;"> 작성 완료! </button>
+</form>
+</div>
+
+<script src="//code.jquery.com/jquery-3.3.1.min.js"></script>
+<script>
+function readURL(input) {
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
+        reader.onload = function(e) {
+            $('#pic').attr('src', e.target.result);
+        }
+        reader.readAsDataURL(input.files[0]);
+    }
+}
+
+$("#pic_input").change(function() {
+    readURL(this);
+});
+
+</script>
+</body>
+</html>
+{% endblock content %} 

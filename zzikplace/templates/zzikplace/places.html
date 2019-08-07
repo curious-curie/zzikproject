@@ -1,0 +1,15 @@
+
+{% extends 'base.html' %} 
+{% load staticfiles%}
+{% block content %}
+
+{% for place in places %}
+<a href="/reviews/detail/{{place.id}}">
+<div class = "box" style="display: flex; margin: 10px; padding: 10px; background-color: white; flex-wrap: wrap;"> 
+<h3>{{ place.title }}</h3>
+<h5>{{ place.address }}</h5>
+</div> 
+</a>
+{% endfor %}
+
+{% endblock content %} 

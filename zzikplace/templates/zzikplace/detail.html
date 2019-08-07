@@ -3,7 +3,7 @@
 {% block content %}
 
 <head>
-<!-- Place your kit's code here -->
+    <title> 장소 상세 페이지 </title>
     <script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
     <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
@@ -16,44 +16,76 @@
 
     <div class="item place-info">
      <div class = "info-bar">
-        <div> <span id = "title">{{ place.title }} </span> 
-        <span id = "view"> <i class="fas fa-eye"></i> 조회수<i class="fas fa-bookmark" style="margin-left: 10px;"></i> 저장수</span> 
-        <span id = "buttons">
-    
-        {% comment %} <a href="/reviews/{{ place.id }}/save">        <!--view-->
-          {% if product in user.places_saved.all %} {% endcomment %}
-            <i class="fas fa-bookmark" style="margin-right: 10px;"></i>
-          {% comment %} {% else %}
-            <i class="far fa-bookmark"></i>
-          {% endif %}
-        </a> {% endcomment %}
-        <i class="fas fa-pen"></i>      
-    
-        </span>
+        <div style="margin-bottom: 10px;"> 
+            <span id = "title">{{ place.title }}  </span> 
+            <span id = "view"> <i class="fas fa-eye"></i> 조회수<i class="fas fa-bookmark" style="margin-left: 10px;"></i> 저장수</span> 
+            <span id = "buttons">
+                <i class="fas fa-bookmark" style="margin-right: 10px;"></i>
+                <a href="add"> <i class="fas fa-pen"></i> </a>    
+            </span>
         </div>
         <div id="address"> {{ place.address }} </div>
-
-         <div class = "photo-wrapper">
-         <ul>
-            <li><img src="{% static 'zzikplace/img/main.jpg' %}"></li>
-            <li><img src="{% static 'zzikplace/img/main1.jpg' %}"></li>
-            <li><img src="{% static 'zzikplace/img/main.jpg' %}"></li>
-         </ul>
-         <button class = "more-button" style="color:white;">사진 더보기</button>
+        <div class = "photo-wrapper">
+            <ul>
+                {% for review in place.review_set.all %}
+                        {% if forloop.counter < 4 %}
+                            <li><img src = "{{review.photo.url}}"></li>
+                        {% endif %}
+                {% endfor %}    
+            </ul>
+            <button class = "more-button" style="color:white;">사진 더보기</button>
         </div> 
-     
-         <div class = "chart-wrap" style="width: 250px; height: 70px;">
-        {% comment %} <canvas id="timeChart" style="opacity: 0.7;"></canvas> {% endcomment %}
+    
+        <div class = "chart-wrap" style="width: 250px; height: 10px;">
         </div> 
       </div>
     </div>
 
+
+
     <div class="item review">
+<<<<<<< HEAD
     {% for c in place.review_set.all %}
         <p> {{ c.tip }} </p>
     {% endfor %}
     </div>
 
+=======
+
+        <div class="review_infobar">
+            <span id="review_number"> 리뷰({{place.review_set.count}}) </span>
+            <span id="review_filter"> 필터: 최신순/좋아요순 </span>
+        </div>
+
+        <div class="review_wrapper"> 
+
+            {% for review in place.review_set.all %}
+            <div class="each_review">
+                <div class="review_photo"> <img src = "{{ review.photo.url}}"/></div>
+                <div class="review_content">{{ review.tip }}</div>
+                <div>
+                <button style="float: left; font-size: 2px"> 좋아요 </button>
+                <a style="float: right; font-size: 1px"> {{ review.author }}</a>
+                </div>
+            </div>
+            {% endfor %}
+
+            <div class="each_review">
+                <div class="review_photo">photo</div>
+                <div class="review_content">content</div>
+                <button style="float: left; font-size: 2px"> 좋아요 </button>
+                <p style="float: right; font-size: 1px"> 작성자 : {review.author}</p>
+            </div> 
+
+        </div>
+
+    </div>
+
+
+
+
+
+>>>>>>> cae40394784a461f913c39e31259bd4de3dfb47d
     <div class="item sidebar">
         <div class="map-container">
             <div id="map" style="width:100%;height:20vw;"></div>
@@ -62,25 +94,19 @@
         <div class ="around-container">
             <span> 주변 찍플 </span>
             <div>
-            <span id = "around-photo">
-            photo
-            </span>
-
-            <span id = "around-info">
-            <a id = "around-name"> place.title </a>
-            <a id = "around-address">place.address</a>
-            </span>
+                <span id = "around-photo"> photo</span>
+                <span id = "around-info">
+                    <a id = "around-name"> place.title </a>
+                    <a id = "around-address">place.address</a>
+                </span>
             </div>
 
             <div>
-            <span id = "around-photo">
-            photo
-            </span>
-
-            <span id = "around-info">
-            <a id = "around-name"> place.title </a>
-            <a id = "around-address">place.address</a>
-            </span>
+                <span id = "around-photo">photo</span>
+                <span id = "around-info">
+                    <a id = "around-name"> place.title </a>
+                    <a id = "around-address">place.address</a>
+                </span>
             </div>
 
         </div>
@@ -92,7 +118,7 @@
 <script>
 $(".more-button").click(function() {
 
-    var scrollPosition = $("#review").offset().top;
+    var scrollPosition = $(".review_wrapper").offset().top;
 
     $('html,body').animate({
         scrollTop: scrollPosition
@@ -151,9 +177,9 @@ var map = new kakao.maps.Map(mapContainer, mapOption);
 
 // 주소-좌표 변환 객체를 생성합니다
 var geocoder = new kakao.maps.services.Geocoder();
-
+var addr = "{{ place.address }}";
 // 주소로 좌표를 검색합니다 place.address
-geocoder.addressSearch('부산광역시 해운대구 우동 동백로 52', function(result, status) {
+geocoder.addressSearch(addr, function(result, status) {
 
     // 정상적으로 검색이 완료됐으면 
      if (status === kakao.maps.services.Status.OK) {
@@ -165,14 +191,6 @@ geocoder.addressSearch('부산광역시 해운대구 우동 동백로 52', funct
             map: map,
             position: coords
         });
-
-        // 인포윈도우로 장소에 대한 설명을 표시합니다
-        //var infowindow = new kakao.maps.InfoWindow({
-        //    content: '<div style="width:150px;text-align:center;padding:6px 0;"> place.name </div>'
-        // });
-        // infowindow.open(map, marker);
-
-        // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
         map.setCenter(coords);
     } 
 });    
