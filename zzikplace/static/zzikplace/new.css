@@ -1,0 +1,89 @@
+section {
+    width: 60%;
+    margin-top: 30px;
+    padding-bottom: 30px;
+    border-bottom: 1px solid lightgray;
+}
+h5, h3{
+    font-weight: bold;
+}
+
+#map{
+    border-radius: 10px;
+    width: 150%;
+}
+.search-wrap {
+    width: 50%;
+    background-color: white;
+    padding: 5px;
+    border: 1px solid lightgray;
+    border-radius: 20px;
+    margin-bottom: 10px;
+}
+
+
+
+input:focus,
+select:focus,
+textarea:focus,
+button:focus {
+    outline: none;
+    border: none;
+}
+
+button{
+    opacity: 0.7;
+    border: none;
+    border-radius: 20px;
+    padding: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+input:hover{
+    opacity: 1;
+}
+
+input {
+    margin: 5px;
+    border: none;
+    opacity: 0.7;
+}
+
+input[type=checkbox]{
+    padding: 5px;
+    transform: scale(1.5);
+}
+
+#pic_input{
+    background-color: whitesmoke;
+    border: none;
+    color:gray;
+}
+
+
+button:hover {
+    opacity: 1;
+
+}
+
+#submit-bt{
+    background-color: #bac8ff;
+    opacity: 0.7;
+    font-size: 20px;
+    border-radius: 50px;
+    border: none;
+    padding: 10px;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+#submit-bt:hover{
+    opacity: 1;
+}
+
+#tip-box{
+    padding: 10px;
+    border-radius: 10px;
+}
+

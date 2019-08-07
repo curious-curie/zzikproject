@@ -37,18 +37,22 @@
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item">
-        <a class="nav-link active" href="/popular">인기찍플</a>
+        <a class="nav-link active" href="/reviews/places">인기찍플</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link active" href="/around">내주변📍</a>
+        <a class="nav-link active" href="#">내주변📍</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link active" href="/forum">포럼</a>
-      </li>
+        <a class="nav-link active" href="/reviews/my">MY찍플</a>
+      </li>  
+      <li class="nav-item">
+        <a class="nav-link active" href="/reviews/new/" style="color:salmon; font-weight:bold;">리뷰 쓰기</a>
+      </li>   
+ 
 
       <div class = "top-search">
       <input type="text" class="search-input" placeholder="장소/테마 검색" style="border:solid; border-width: 1px; border-color: lightgrey; width: 260px; height: 30px;"/>
-      <button class="search-icon" style = "background-color: transparent; border: none; position: relative; left: -15%; top:-5%;"><img src = "https://www.konfest.com/wp-content/uploads/2019/05/Konfest-PNG-JPG-Image-Pic-Photo-Free-Download-Royalty-Unlimited-clip-art-sticker-icons-search-symbol-find-magnifying-glass-101.png", width ="20px"></button>
+      <button class="search-icon" style = "background-color: transparent; border: none; position: relative; left: -15%; top:-2.5%;"><img src = "https://www.konfest.com/wp-content/uploads/2019/05/Konfest-PNG-JPG-Image-Pic-Photo-Free-Download-Royalty-Unlimited-clip-art-sticker-icons-search-symbol-find-magnifying-glass-101.png", width ="20px"></button>
       </div>
   
       {% comment %} <li class="nav-item dropdown">
@@ -72,8 +76,10 @@
   <ul class="navbar-nav">
     <li class="nav-item">
         {% if user.is_active %}
-        {{ user.get_username }}님, 안녕하세요! 
+       
         <a class="nav-link" href="/accounts/logout">로그아웃</a>
+        <a class = "nav-link">
+        {{ user.get_username }}님, 안녕하세요!</a>
          {% else %}
 
         <a class="nav-link" href="/accounts/login">로그인</a>
@@ -85,6 +91,7 @@
      </ul>
   </div>
 </nav>
+
 </body>
 
 {% block content %} {% endblock %} 

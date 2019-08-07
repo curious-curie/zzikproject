@@ -1,3 +1,4 @@
+
 {% extends 'base.html' %} 
 {% load staticfiles%}
 {% block content %}
@@ -6,11 +7,10 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>키워드로 장소검색하고 목록으로 표출하기</title>
     <style>
 .map_wrap, .map_wrap * {margin:0;padding:0;font-family:'Malgun Gothic',dotum,'돋움',sans-serif;font-size:12px;}
 .map_wrap a, .map_wrap a:hover, .map_wrap a:active{color:#000;text-decoration: none;}
-.map_wrap {position:relative;width:100%;height:500px;}
+.map_wrap {position:relative;width:70%;height:500px;}
 #menu_wrap {position:absolute;top:0;left:0;bottom:0;width:250px;margin:10px 0 30px 10px;padding:5px;overflow-y:auto;background:rgba(255, 255, 255, 0.7);z-index: 1;font-size:12px;border-radius: 10px;}
 .bg_white {background:#fff;}
 #menu_wrap hr {display: block; height: 1px;border: 0; border-top: 2px solid #5F5F5F;margin:3px 0;}
@@ -44,42 +44,84 @@
 #pagination {margin:10px auto;text-align: center;}
 #pagination a {display:inline-block;margin-right:10px;}
 #pagination .on {font-weight: bold; cursor: default;color:#777;}
+.wrapper{
+    margin: 40px;
+}
+
 </style>
+<link rel="stylesheet"  href="{% static 'zzikplace/new.css' %}"/>
 </head>
 <body>
-<div class="map_wrap">
-    <div id="map" style="width:100%;height:100%;position:relative;overflow:hidden;"></div>
+
+<div class="wrapper">
+<h3> 찍플 리뷰쓰기</h3>
+
+<section>
+
+
+<h5>리뷰 쓸 장소 검색</h5>
+<div class = "search-wrap">
+<form onsubmit="searchPlaces(); return false;">
+                    <input type="text" placeholder= "장소명/지역" id="keyword" size="15" style="width: 70%;"autocomplete = off> 
+                    <button type="submit" class="start_search">검색하기</button> 
+</form>
+</div>
+<div class="map_wrap" id="map_wrap">
+    <div id="map" style="height:100%;position:relative;overflow:hidden;"></div>
 
     <div id="menu_wrap" class="bg_white">
         <div class="option">
-            <div>
-                <form onsubmit="searchPlaces(); return false;">
-                    키워드 : <input type="text" value={{ searchwords.searchword }} id="keyword" size="15"> 
-                    <button type="submit">검색하기</button> 
-                </form>
-            </div>
         </div>
         <hr>
         <ul id="placesList"></ul>
         <div id="pagination"></div>
     </div>
 </div>
-<div>
-    <form action="/zzikplace/" method="POST">
-        {% csrf_token %}
-        장소이름 : <input type="text" id="selectedName" name="selectedName" />
-        주소 : <input type="text" id="selectedAddress" name="selectedAddress" />
-        <input type="submit" value="새로운 장소 등록하기" />
-    </form>
+
+
+<form action="/reviews/detail/" method="POST" enctype="multipart/form-data" >
+{% csrf_token %}
+장소명 <input id = "selected_place_name" name = "place_name" readonly> <br>
+주소 <input id = "selected_place_addr" name = "place_addr" style="width: 400px;" readonly>
+<input id = "place_x" name="place_x" style="display: none;">
+<input id = "place_y" name="place_y" style="display: none;">
+<button style="display:none;" type="button" class = "end_search" >확인</button>
+</section>
+
+<section>
+<h5>사진 잘 나오는 시간 추천</h5>
+<input type="checkbox" name="time" value="A">해 뜰 무렵 🌅
+<input type="checkbox" name="time" value="B">한낮☀️
+<input type="checkbox" name="time" value="C">해 질 무렵 🌇
+<input type="checkbox" name="time" value="D">밤 🌙️
+<input type="checkbox" name="time" value="E">시간이 상관 없어요 ⏰
+</section>
+
+<section> 
+<h5>이 장소에서 찍은 베스트컷을 올려주세요!</h5> 
+<input id = "pic_input" name="photo" type="file"/><br>
+    <img id = "pic" src="#" width="300px"/>
+</section>
+
+<section>
+<h5>인생샷을 위한 꿀팁</h5>
+간단한 리뷰도 환영이에요! <br>
+<input id = "tip-box" type="text" style="width:500px; height: 200px;" autocomplete = off name="tip">
+</section>
+
+<section>
+<h5> 해시태그 </h5>
+<input id = "tip-box" name = "tag_content" type="text" style="width:500px; height: 50px;" placeholder = "예시: #카페 #커플 #이태원" autocomplete = off >
+
+<button id = "submit-bt" type="submit" style="margin-top: 30px;"> 작성 완료! </button>
+</form>
+//엔터키치면 제출되는거 막아야함 
 </div>
 
-<<<<<<< HEAD
-<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=&libraries=services"></script>
-=======
-<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=21ee733d0aeedb185db32a90fb8bab6d&libraries=services"></script>
->>>>>>> curie
-<script>
 
+<script src="//code.jquery.com/jquery-3.3.1.min.js"></script>
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=64ecc30ef2f8d205d1168dea4d7ded6d&libraries=services"></script>
+<script>
 // 마커를 담을 배열입니다
 var markers = [];
 
@@ -101,13 +143,16 @@ var infowindow = new kakao.maps.InfoWindow({zIndex:1});
 // 키워드로 장소를 검색합니다
 searchPlaces();
 
+function showMap(){
+    document.getElementById("map_wrap").style.display = 'block';
+}
 // 키워드 검색을 요청하는 함수입니다
 function searchPlaces() {
 
     var keyword = document.getElementById('keyword').value;
 
     if (!keyword.replace(/^\s+|\s+$/g, '')) {
-        alert('키워드를 입력해주세요!');
+        //alert('키워드를 입력해주세요!');
         return false;
     }
 
@@ -148,7 +193,6 @@ function displayPlaces(places) {
     bounds = new kakao.maps.LatLngBounds(), 
     listStr = '';
     
-
     // 검색 결과 목록에 추가된 항목들을 제거합니다
     removeAllChildNods(listEl);
 
@@ -156,6 +200,7 @@ function displayPlaces(places) {
     removeMarker();
     
     for ( var i=0; i<places.length; i++ ) {
+
 
         // 마커를 생성하고 지도에 표시합니다
         var placePosition = new kakao.maps.LatLng(places[i].y, places[i].x),
@@ -166,11 +211,10 @@ function displayPlaces(places) {
         // LatLngBounds 객체에 좌표를 추가합니다
         bounds.extend(placePosition);
 
-
         // 마커와 검색결과 항목에 mouseover 했을때
         // 해당 장소에 인포윈도우에 장소명을 표시합니다
         // mouseout 했을 때는 인포윈도우를 닫습니다
-        (function(marker, title, address) {
+        (function(marker, title, address, address2, x, y) {
             kakao.maps.event.addListener(marker, 'mouseover', function() {
                 displayInfowindow(marker, title);
             });
@@ -187,14 +231,30 @@ function displayPlaces(places) {
                 infowindow.close();
             };
 
-            itemEl.onclick = function () {
-                renderInfo(marker, title, address);
-            };
+            //여기가 내가 추가한 것 
+            itemEl.onclick = function() {
         
-        })(marker, places[i].place_name, places[i].road_address_name);
+                console.log(title);
+                console.log(address);
+                document.getElementById('selected_place_name').value = title;
+                document.getElementById('place_x').value = x;
+                document.getElementById('place_y').value = y;
+                if(address) {
+                    document.getElementById('selected_place_addr').value = address; 
+                }
+                else {
+                    document.getElementById('selected_place_addr').value = address2; 
+                }
+
+                document.getElementById('map_wrap').style.display = 'none';
+            };
+
+        })(marker, places[i].place_name, places[i].road_address_name, places[i].address_name, places[i].x, places[i].y);
 
         fragment.appendChild(itemEl);
     }
+
+    
 
     // 검색결과 항목들을 검색결과 목록 Elemnet에 추가합니다
     listEl.appendChild(fragment);
@@ -202,6 +262,10 @@ function displayPlaces(places) {
 
     // 검색된 장소 위치를 기준으로 지도 범위를 재설정합니다
     map.setBounds(bounds);
+}
+
+function wrt(str) {
+    return document.write(str);
 }
 
 // 검색결과 항목을 Element로 반환하는 함수입니다
@@ -227,7 +291,6 @@ function getListItem(index, places) {
 
     return el;
 }
-
 
 // 마커를 생성하고 지도 위에 마커를 표시하는 함수입니다
 function addMarker(position, idx, title) {
@@ -298,21 +361,42 @@ function displayInfowindow(marker, title) {
     infowindow.open(map, marker);
 }
 
-function renderInfo(marker, title, address) {
-
-        document.getElementById('selectedName').value = title;
-        document.getElementById('selectedAddress').value = address;
-    
-}
-
  // 검색결과 목록의 자식 Element를 제거하는 함수입니다
 function removeAllChildNods(el) {   
     while (el.hasChildNodes()) {
         el.removeChild (el.lastChild);
     }
 }
+
+$(document).ready(function(){
+
+    $('.map_wrap').hide();
+
+    $('.start_search').click(function(){
+        $('.map_wrap').show();
+    });
+
+    $('.end_search').click(function(){
+        $('.map_wrap').hide();
+    });
+
+})
+
+function readURL(input) {
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
+        reader.onload = function(e) {
+            $('#pic').attr('src', e.target.result);
+        }
+        reader.readAsDataURL(input.files[0]);
+    }
+}
+
+$("#pic_input").change(function() {
+    readURL(this);
+});
+
 </script>
 </body>
 </html>
-
 {% endblock content %} 

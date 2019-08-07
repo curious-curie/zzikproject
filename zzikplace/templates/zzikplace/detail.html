@@ -1,0 +1,201 @@
+{% extends 'base.html' %} 
+{% load staticfiles%}
+{% block content %}
+
+<head>
+    <title> 장소 상세 페이지 </title>
+    <script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
+    <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+    <link rel="stylesheet"  href="{% static 'zzikplace/detail.css' %}"/>
+</head> 
+
+<body>
+
+<div class="container">
+
+    <div class="item place-info">
+     <div class = "info-bar">
+        <div style="margin-bottom: 10px;"> 
+            <span id = "title">{{ place.title }}  </span> 
+            <span id = "view"> <i class="fas fa-eye"></i> 조회수<i class="fas fa-bookmark" style="margin-left: 10px;"></i> 저장수</span> 
+            <span id = "buttons">
+    {% comment %}  {% endcomment %}
+                {% if user.is_authenticated %}
+                    <a href="/reviews/detail/{{ place.id }}/save">
+                        {% if place in user.places_saved.all %}
+                            <i class="fas fa-bookmark" style="margin-right: 10px;"></i>
+                        {% else %}
+                            <i class="far fa-bookmark" style="margin-right: 10px;"></i>
+                        {% endif %}
+                    </a>
+                {% endif %}
+    {% comment %}  {% endcomment %}
+                <a href="add"> <i class="fas fa-pen"></i> </a>    
+            </span>
+        </div>
+        <div id="address"> {{ place.address }} </div>
+        <div class = "photo-wrapper">
+            <ul>
+                {% for review in place.review_set.all %}
+                        {% if forloop.counter < 4 %}
+                            <li><img src = "{{review.photo.url}}"></li>
+                        {% endif %}
+                {% endfor %}    
+            </ul>
+            <button class = "more-button" style="color:white;">사진 더보기</button>
+        </div> 
+    
+        <div class = "chart-wrap" style="width: 250px; height: 10px;">
+        </div> 
+      </div>
+    </div>
+
+
+
+    <div class="item review">
+
+        <div class="review_infobar">
+            <span id="review_number"> 리뷰({{place.review_set.count}}) </span>
+            <span id="review_filter"> 필터: 최신순/좋아요순 </span>
+        </div>
+
+        <div class="review_wrapper"> 
+        {% comment %} {% for review in reviews %} {% endcomment %}
+            <div class="each_review">
+                <div class="review_photo">photo</div>
+                <div class="review_content">{ review.tip }</div>
+                <a href="reviews/detail/{{ review.id }}/like" style="float: left; font-size: 2px"> 좋아요 </a>
+                <p style="float: right; font-size: 1px"> 작성자: { review.author }</p>
+            </div>
+
+            {% for review in place.review_set.all %}
+            <div class="each_review">
+                <div class="review_photo">photo</div>
+                <div class="review_content">{ review.tip }</div>
+                <a href="reviews/detail/{{ review.id }}/like" style="float: left; font-size: 2px"> 좋아요 </a>
+                <p style="float: right; font-size: 1px"> 작성자: { review.author }</p>
+            </div>
+        {% comment %} {% endfor %} {% endcomment %}
+        </div>
+
+    </div>
+
+
+
+
+
+    <div class="item sidebar">
+        <div class="map-container">
+            <div id="map" style="width:100%;height:20vw;"></div>
+        </div>
+
+        <div class ="around-container">
+            <span> 주변 찍플 </span>
+            <div>
+                <span id = "around-photo"> photo</span>
+                <span id = "around-info">
+                    <a id = "around-name"> place.title </a>
+                    <a id = "around-address">place.address</a>
+                </span>
+            </div>
+
+            <div>
+                <span id = "around-photo">photo</span>
+                <span id = "around-info">
+                    <a id = "around-name"> place.title </a>
+                    <a id = "around-address">place.address</a>
+                </span>
+            </div>
+
+        </div>
+
+
+    </div>
+
+</div>
+<script>
+$(".more-button").click(function() {
+
+    var scrollPosition = $(".review_wrapper").offset().top;
+
+    $('html,body').animate({
+        scrollTop: scrollPosition
+    }, 500);
+});
+
+
+
+var ctx = document.getElementById('timeChart').getContext('2d');
+var timeChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+        labels: ['해뜰무렵', '한낮', '해질무렵', '️밤', '상관없음'],
+        datasets: [{
+            backgroundColor: ['f1d4d4', 'salmon', 'lightpink', 'salmon','gray'],
+            data: [1,2,3,4,5]
+        }]
+    },
+    
+    options: {
+
+        scales: {
+          xAxes: [{
+            barPercentage: 0.6,
+            categoryPercentage: 0.7,
+            ticks: {
+            fontSize: 10
+            }
+          }],
+          yAxes: [{
+            barThickness: 2,
+            display: false,
+             ticks: {
+                beginAtZero: true
+            }
+          }],
+        },
+        legend: {
+            display: false,
+        }
+        
+    }
+});
+</script>
+
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=64ecc30ef2f8d205d1168dea4d7ded6d&libraries=services"></script>
+<script>
+var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+    mapOption = {
+        center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
+        level: 5 // 지도의 확대 레벨
+    };  
+
+// 지도를 생성합니다    
+var map = new kakao.maps.Map(mapContainer, mapOption); 
+
+// 주소-좌표 변환 객체를 생성합니다
+var geocoder = new kakao.maps.services.Geocoder();
+var addr = "{{ place.address }}";
+// 주소로 좌표를 검색합니다 place.address
+geocoder.addressSearch(addr, function(result, status) {
+
+    // 정상적으로 검색이 완료됐으면 
+     if (status === kakao.maps.services.Status.OK) {
+
+        var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+
+        // 결과값으로 받은 위치를 마커로 표시합니다
+        var marker = new kakao.maps.Marker({
+            map: map,
+            position: coords
+        });
+        map.setCenter(coords);
+    } 
+});    
+</script>
+
+</body>
+
+
+{% endblock content %} 
