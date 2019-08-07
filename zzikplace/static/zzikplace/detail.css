@@ -22,7 +22,7 @@
     display: grid;
     grid-template-columns: 75% 25%;
     grid-column-gap: 2%;
-    grid-row-gap: 0;
+    grid-row-gap: 2%;
     color: rgb(63, 63, 63);
     grid-template-rows: minmax(100px, 400px);
 }
@@ -45,6 +45,62 @@
     grid-column: 1;
     grid-row: 2;
 }
+
+/*************** Yeji ****************/
+.review_infobar {
+    margin-bottom: 10px;
+    height: 40px;
+}
+
+#review_number {
+    float: left;
+    padding-left: 20px;
+    font-size: 1.8vw;
+    font-weight: 450;
+    margin-bottom: 10px;
+    padding-top: 20px;
+}
+
+#review_filter {
+    float: right;
+    padding-right: 20px;
+    padding-top: 20px;
+    font-size: 1vw;
+}
+
+.review_wrapper {
+    display: grid;
+    position: relative;
+    width: 100%;
+    grid-template-columns: 50% 50%;
+    /* grid-column-gap: 2%;  */
+    grid-auto-rows: minmax(min-content, max-content);
+    grid-row-gap: 10px;
+}
+
+.each_review {
+    height: 340px;
+    width: 90%;
+    margin:12px auto;
+    border: black;
+}
+
+.review_photo {
+    background-color: pink;
+    width: 100%;
+    height: 200px;
+    margin-bottom: 10px;
+}
+
+.review_content {
+    height: 100px;
+    width: 100%;
+    background-color: gray;
+    margin-bottom: 10px;
+}
+
+
+/************************************/
 
 .sidebar {
     margin-top: 30px;
@@ -116,7 +172,6 @@
 
 .photo-wrapper img{
     width: 100%;
-   
 }
 
 .map-container{
