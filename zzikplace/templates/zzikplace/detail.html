@@ -50,12 +50,17 @@
         </div>
 
         <div class="review_wrapper"> 
+
+            {% for review in place.review_set.all %}
             <div class="each_review">
-                <div class="review_photo">photo</div>
-                <div class="review_content">content</div>
+                <div class="review_photo"> <img src = "{{ review.photo.url}}"/></div>
+                <div class="review_content">{{ review.tip }}</div>
+                <div>
                 <button style="float: left; font-size: 2px"> 좋아요 </button>
-                <p style="float: right; font-size: 1px"> {review.author}</p>
+                <a style="float: right; font-size: 1px"> {{ review.author }}</a>
+                </div>
             </div>
+            {% endfor %}
 
             <div class="each_review">
                 <div class="review_photo">photo</div>
@@ -104,7 +109,7 @@
 <script>
 $(".more-button").click(function() {
 
-    var scrollPosition = $("#review").offset().top;
+    var scrollPosition = $(".review_wrapper").offset().top;
 
     $('html,body').animate({
         scrollTop: scrollPosition
