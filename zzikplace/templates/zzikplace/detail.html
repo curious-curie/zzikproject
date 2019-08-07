@@ -20,7 +20,17 @@
             <span id = "title">{{ place.title }}  </span> 
             <span id = "view"> <i class="fas fa-eye"></i> 조회수<i class="fas fa-bookmark" style="margin-left: 10px;"></i> 저장수</span> 
             <span id = "buttons">
-                <i class="fas fa-bookmark" style="margin-right: 10px;"></i>
+    {% comment %}  {% endcomment %}
+                {% if user.is_authenticated %}
+                    <a href="/reviews/detail/{{ place.id }}/save">
+                        {% if place in user.places_saved.all %}
+                            <i class="fas fa-bookmark" style="margin-right: 10px;"></i>
+                        {% else %}
+                            <i class="far fa-bookmark" style="margin-right: 10px;"></i>
+                        {% endif %}
+                    </a>
+                {% endif %}
+    {% comment %}  {% endcomment %}
                 <a href="add"> <i class="fas fa-pen"></i> </a>    
             </span>
         </div>
@@ -56,13 +66,10 @@
             <div class="each_review">
                 <div class="review_photo"> <img src = "{{ review.photo.url}}"/></div>
                 <div class="review_content">{{ review.tip }}</div>
-                <div>
-                <button style="float: left; font-size: 2px"> 좋아요 </button>
-                <a style="float: right; font-size: 1px; margin-right: 5px;"> by. {{ review.author }}</a>
-                </div>
+                <a href="reviews/detail/{{ review.id }}/like" style="float: left; font-size: 2px"> 좋아요 </a>
+                <p style="float: right; font-size: 1px; margin-right: 5px;"> 작성자: {{ review.author }}</p>
             </div>
-            {% endfor %}
-            
+            {% endfor %} 
         </div>
 
     </div>
