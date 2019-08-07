@@ -8,37 +8,46 @@
 <head>
     <meta charset="utf-8">
     <script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
-    <link rel="stylesheet"  href="{% static 'zzikplace/saved.css' %}"/>
+    <link rel="stylesheet"  href="{% static 'zzikplace/my.css' %}"/>
+    <script src="https://kit.fontawesome.com/e2620f3315.js"></script>
 </head>
 
 <body>
 
 <div class="wrapper">
-
-  <div style="font-weight:bold; font-size:20px; color:gray; text-align:center"> Total : {{ user.places_saved.count }} </div>
+<div style="font-weight:bold; font-size:2rem; color:gray; text-align:center"> 저장한 장소 목록  </div>
+<div style="font-weight:bold; font-size:1.5rem; color:gray; text-align:center"> Total : {{ user.places_saved.count }} </div>
   
 {% comment %} {% for place in places %} {% endcomment %}
 
-<a href="/reveiws/detail/{{place.id}}">
+
   <div class="item">
-    <div class="polaroid"><img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/210284/7cQCk5I.jpg">
+   
+    <div class="polaroid">
+    <a href="/reviews/detail/{{place.id}}">
+        <img src="https://dashhudson.com/static/img/industries/travel-2.jpg">
+    </a>
       <div class="caption">
         <div style="font-weight:bold; font-size:20px;">  place.title  </div>   
-        <div>  place.address   </div>
+        <div>  place.address 
+        <i class="fas fa-trash-alt fa-lg"></i>
+        </div>
       </div>
     </div>
+  
   </div>
-</a>
+
 
 {% comment %} {% endfor %} {% endcomment %}
 {# 밑에 다 지우고 for문 살리면됨 #}
 
-<a href="/reveiws/detail/{{place.id}}">
+<a href="/reviews/detail/{{place.id}}">
   <div class="item">
-    <div class="polaroid"><img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/210284/7cQCk5I.jpg">
+    <div class="polaroid"><img src="https://dashhudson.com/static/img/industries/travel-2.jpg">
       <div class="caption">
         <div style="font-weight:bold; font-size:20px;">  place.title  </div>   
         <div>  place.address   </div>
+        
       </div>
     </div>
   </div>
