@@ -1,14 +1,13 @@
 from django.contrib import admin
 from .models import Place
-from .models import Review, Tag
+from .models import Review, Tag, Like, Save
 
 class ReviewInline(admin.TabularInline):
     model = Review
 
 
-
 class PlaceAdmin(admin.ModelAdmin):
-    list_display = ['id', 'title', 'address']
+    list_display = ['id', 'title', 'address', 'get_tags']
     inlines = [
         ReviewInline,
     ]
@@ -29,4 +28,6 @@ class ReviewAdmin(admin.ModelAdmin):
 admin.site.register(Place, PlaceAdmin)
 admin.site.register(Review, ReviewAdmin)
 admin.site.register(Tag)
-# Register your models here.
+admin.site.register(Save)
+admin.site.register(Like)
+

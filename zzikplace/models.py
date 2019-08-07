@@ -35,6 +35,10 @@ class Place(models.Model):
         for t in tags:
             tag, tag_created = Tag.objects.get_or_create(name=t)
             self.tag_set.add(tag)
+    
+    def get_tags(self):
+        return ",".join([str(p) for p in self.tag_set.all()])
+
 
 class Tag(models.Model):
     name = models.CharField(max_length=140, unique=True)
