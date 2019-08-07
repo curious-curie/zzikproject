@@ -11,7 +11,9 @@ def around(request):
     return render(request, 'zzikplace/index.html')
 
 def my(request):
-    return render(request, 'zzikplace/my.html')
+    places = Place.objects.filter(saved_users = request.user)
+    print(places)
+    return render(request, 'zzikplace/my.html', {'places' : places})
 
 def new(request):
     return render(request, 'zzikplace/new.html')
@@ -32,7 +34,7 @@ def detail(request, id=None):
         place.tag_save()
         review = Review.objects.create(place_id=id, tip=tip, photo=photo, time=time, author=request.user)
         review.save()
-        return render(request, 'zzikplace/detail.html', {'place': place})
+        return redirect('/reviews/detail/' + str(id))
 
     elif request.method == "GET":
         place = Place.objects.get(id=id)
