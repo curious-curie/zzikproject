@@ -1,6 +1,6 @@
 from django.contrib import admin
 from .models import Place
-from .models import Review
+from .models import Review, Tag
 
 class ReviewInline(admin.TabularInline):
     model = Review
@@ -28,4 +28,5 @@ class ReviewAdmin(admin.ModelAdmin):
 
 admin.site.register(Place, PlaceAdmin)
 admin.site.register(Review, ReviewAdmin)
+admin.site.register(Tag)
 # Register your models here.
