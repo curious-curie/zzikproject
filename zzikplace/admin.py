@@ -28,4 +28,5 @@ class ReviewAdmin(admin.ModelAdmin):
 
 admin.site.register(Place, PlaceAdmin)
 admin.site.register(Review, ReviewAdmin)
+admin.site.register(Tag)
 # Register your models here.

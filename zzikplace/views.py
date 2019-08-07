@@ -10,6 +10,9 @@ def index(request):
 def around(request):
     return render(request, 'zzikplace/index.html')
 
+def my(request):
+    return render(request, 'zzikplace/my.html')
+
 def new(request):
     return render(request, 'zzikplace/new.html')
 
@@ -23,7 +26,7 @@ def detail(request, id=None):
         photo = request.FILES.get('photo', False)
         time = request.POST['time']
         tag_content = request.POST['tag_content']
-        place, is_place = Place.objects.get_or_create(address=address, title=title, x= x, y= y)
+        place, is_place = Place.objects.get_or_create(address=address, tag_content = tag_content, title=title, x= x, y= y)
         id = place.id
         place.save()
         place.tag_save()

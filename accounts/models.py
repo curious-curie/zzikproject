@@ -11,11 +11,17 @@ class Profile(models.Model):   # 추가
     def __str__(self):   # 추가
         return 'id=%d, user id=%d' % (self.id, self.user.id)
 
-@receiver(post_save, sender=User)
-def create_user_profile(sender, instance, created, **kwargs):  
-    if created:
-        Profile.objects.create(user=instance)
+# @receiver(post_save, sender=User)
+# def create_user_profile(sender, instance, created, **kwargs):  
+#     if created:
+#         Profile.objects.create(user=instance)
 
+<<<<<<< HEAD
 @receiver(post_save, sender=User)
 def save_user_profile(sender, instance, **kwargs):  
     instance.profile.save()
+=======
+# @receiver(post_save, sender=User)
+# def save_user_profile(sender, instance, **kwargs):  
+#     instance.profile.save()
+>>>>>>> curie
