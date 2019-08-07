@@ -9,6 +9,9 @@ def index(request):
 def around(request):
     return render(request, 'zzikplace/index.html')
 
+def my(request):
+    return render(request, 'zzikplace/my.html')
+
 def new(request):
     return render(request, 'zzikplace/new.html')
 
