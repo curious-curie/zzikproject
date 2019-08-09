@@ -92,17 +92,19 @@
         </div>
 
         <div class ="around-container">
-            <span> 주변 찍플 </span>
+            <span style="margin-bottom:20px;"> 주변 찍플 </span>
             <div>
                 <span id = "around-photo" class="photo-wrapper"> 
                     {% for review in first_around.review_set.all %}
                         {% if forloop.counter < 2 %}
+                            <a href = "/reviews/detail/{{first_around.id}}">
                             <img src = "{{review.photo.url}}">
+                            </a>
                         {% endif %}
                     {% endfor %}
                 </span>
                 <span id = "around-info">
-                    <a id = "around-name" href = "/reviews/detail/{{first_around.id}}"> {{ first_around.title }} </a>
+                    <div><a id = "around-name"  href = "/reviews/detail/{{first_around.id}}"> {{ first_around.title }} </a> </div>
                     <a id = "around-address"> {{ first_around.address }} </a>
                 </span>
             </div>
@@ -111,12 +113,14 @@
                 <span id = "around-photo" class="photo-wrapper">
                     {% for review in second_around.review_set.all %}
                         {% if forloop.counter < 2 %}
+                            <a href = "/reviews/detail/{{second_around.id}}">
                             <img src = "{{review.photo.url}}">
+                            </a>
                         {% endif %}
                     {% endfor %}
                 </span>
                 <span id = "around-info">
-                    <a id = "around-name" href = "/reviews/detail/{{second_around.id}}"> {{ second_around.title }} </a>
+                   <div><a id = "around-name"  href = "/reviews/detail/{{second_around.id}}"> {{ second_around.title }} </a> </div>
                     <a id = "around-address"> {{ second_around.address }} </a>
                 </span>
             </div>
@@ -137,7 +141,7 @@ $(".more-button").click(function() {
     }, 500);
 });
 
-
+{% comment %} 
 
 var ctx = document.getElementById('timeChart').getContext('2d');
 var timeChart = new Chart(ctx, {
@@ -173,7 +177,7 @@ var timeChart = new Chart(ctx, {
         }
         
     }
-});
+}); {% endcomment %}
 </script>
 
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=64ecc30ef2f8d205d1168dea4d7ded6d&libraries=services"></script>
