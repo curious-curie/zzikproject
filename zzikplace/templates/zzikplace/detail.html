@@ -94,18 +94,30 @@
         <div class ="around-container">
             <span> 주변 찍플 </span>
             <div>
-                <span id = "around-photo">   </span>
+                <span id = "around-photo" class="photo-wrapper"> 
+                    {% for review in first_around.review_set.all %}
+                        {% if forloop.counter < 2 %}
+                            <img src = "{{review.photo.url}}">
+                        {% endif %}
+                    {% endfor %}
+                </span>
                 <span id = "around-info">
-                    <a id = "around-name"> place.title </a>
-                    <a id = "around-address">place.address</a>
+                    <a id = "around-name" href = "/reviews/detail/{{first_around.id}}"> {{ first_around.title }} </a>
+                    <a id = "around-address"> {{ first_around.address }} </a>
                 </span>
             </div>
 
             <div>
-                <span id = "around-photo">photo</span>
+                <span id = "around-photo" class="photo-wrapper">
+                    {% for review in second_around.review_set.all %}
+                        {% if forloop.counter < 2 %}
+                            <img src = "{{review.photo.url}}">
+                        {% endif %}
+                    {% endfor %}
+                </span>
                 <span id = "around-info">
-                    <a id = "around-name"> place.title </a>
-                    <a id = "around-address">place.address</a>
+                    <a id = "around-name" href = "/reviews/detail/{{second_around.id}}"> {{ second_around.title }} </a>
+                    <a id = "around-address"> {{ second_around.address }} </a>
                 </span>
             </div>
 

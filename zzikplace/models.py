@@ -62,7 +62,7 @@ class Place(models.Model):
         arounds = sorted(dist_list.items(), key=lambda kv: kv[1])
         d = dict(arounds)
         sorted_places = list(d.keys())
-
+        
         return sorted_places
         # 거리순으로 나열된 장소명 리스트 
 
