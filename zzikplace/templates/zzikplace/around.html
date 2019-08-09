@@ -54,7 +54,7 @@
         <div class="option">
             <div>
                 <form onsubmit="searchPlaces(); return false;">
-                    키워드 : <input type="text" value={{ searchwords.searchword }} id="keyword" size="15"> 
+                    키워드 : <input type="text" value="이태원 맛집" id="keyword" size="15"> 
                     <button type="submit">검색하기</button> 
                 </form>
             </div>
@@ -63,14 +63,6 @@
         <ul id="placesList"></ul>
         <div id="pagination"></div>
     </div>
-</div>
-<div>
-    <form action="/zzikplace/" method="POST">
-        {% csrf_token %}
-        장소이름 : <input type="text" id="selectedName" name="selectedName" />
-        주소 : <input type="text" id="selectedAddress" name="selectedAddress" />
-        <input type="submit" value="새로운 장소 등록하기" />
-    </form>
 </div>
 
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=21ee733d0aeedb185db32a90fb8bab6d&libraries=services"></script>
@@ -182,10 +174,6 @@ function displayPlaces(places) {
             itemEl.onmouseout =  function () {
                 infowindow.close();
             };
-
-            itemEl.onclick = function () {
-                renderInfo(marker, title, address);
-            };
         
         })(marker, places[i].place_name, places[i].road_address_name);
 
@@ -292,13 +280,6 @@ function displayInfowindow(marker, title) {
 
     infowindow.setContent(content);
     infowindow.open(map, marker);
-}
-
-function renderInfo(marker, title, address) {
-
-        document.getElementById('selectedName').value = title;
-        document.getElementById('selectedAddress').value = address;
-    
 }
 
  // 검색결과 목록의 자식 Element를 제거하는 함수입니다

@@ -62,8 +62,6 @@ class Place(models.Model):
         arounds = sorted(dist_list.items(), key=lambda kv: kv[1])
         d = dict(arounds)
         sorted_places = list(d.keys())
-        print(sorted_places)
-
         return sorted_places
         # 거리순으로 나열된 장소명 리스트 
 
@@ -107,6 +105,19 @@ class Save(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     place = models.ForeignKey(Place, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
+
+
+class SearchWord(models.Model):
+    searchword = models.CharField(max_length=30, blank=True)
+
+@receiver(post_save, sender=User)
+def create_user_profile(sender, instance, created, **kwargs):  
+    if created:
+        Profile.objects.create(user=instance)
+
+@receiver(post_save, sender=User)
+def save_user_profile(sender, instance, **kwargs):  
+    instance.profile.save()
 
 
 # @receiver(post_save, sender=User)

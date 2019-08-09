@@ -39,11 +39,13 @@ def detail(request, id=None):
     elif request.method == "GET":
         place = Place.objects.get(id=id)
         arounds  = place.get_around()
+        first_around = arounds[1]
+        second_around = arounds[2]
         # d = dict(arounds)
         # sorted_places = list(d.keys())
         # first_around = sorted_places[1]
         # second_around = sorted_places[2]
-        return render(request, 'zzikplace/detail.html', {'place': place})
+        return render(request, 'zzikplace/detail.html', {'place':place, 'first_around': first_around, 'second_around':second_around})
 
 
 def add(request, id=None):
@@ -52,6 +54,11 @@ def add(request, id=None):
         return render(request, 'zzikplace/add.html', {'place' : place})
     else:
         return render(request, 'zzikplace/new.html')
+
+def my(request):
+    places = Place.objects.all()
+    return render(request, 'zzikplace/my.html', { 'places': places })
+
 
 def places(request):
     places = Place.objects.all()
@@ -76,4 +83,3 @@ def review_like(request, pk):
         Like.objects.create(user_id = request.user.id, review_id = review.id)
     next = request.META['HTTP_REFERER']
     return redirect (next)
-
