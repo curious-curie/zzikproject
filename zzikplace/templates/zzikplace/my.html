@@ -23,7 +23,11 @@
    
     <div class="polaroid">
     <a href="/reviews/detail/{{place.id}}">
-        <img src="{{ place.photo.url }}">
+      {% for review in place.review_set.all %}
+           {% if forloop.counter < 2 %}
+                <img src = "{{review.photo.url}}">
+           {% endif %}
+      {% endfor %}   
     </a>
       <div class="caption">
         <div style="font-weight:bold; font-size:20px;">  {{place.title}}  </div>   
