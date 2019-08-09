@@ -89,10 +89,11 @@
     padding: 12px;
 }
 
-.review_photo {
+/* .review_photo {
     width: 100%;
+    padding-top: 100%;
     margin-bottom: 16px;
-}
+} */
 
 .review_photo img {
     width: 80%;

@@ -38,6 +38,11 @@ def detail(request, id=None):
 
     elif request.method == "GET":
         place = Place.objects.get(id=id)
+        arounds  = place.get_around()
+        d = dict(arounds)
+        sorted_places = list(d.keys())
+        first_around = sorted_places[1]
+        second_around = sorted_places[2]
         return render(request, 'zzikplace/detail.html', {'place': place})
 
 
