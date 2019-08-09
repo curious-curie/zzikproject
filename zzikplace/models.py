@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 from django.db.models.signals import post_save  # 추가
 from django.dispatch import receiver  
 from django.utils import timezone
-import re
+import re, cmath, math
 
 # class Profile(models.Model):   # 추가
 #     user = models.OneToOneField(User, on_delete=models.CASCADE)
@@ -22,6 +22,7 @@ class Place(models.Model):
     tag_set = models.ManyToManyField('Tag', blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+    place_hit = models.PositiveIntegerField(default=0)
     
     class Meta:
         ordering = ['-created_at']
@@ -39,6 +40,37 @@ class Place(models.Model):
     def get_tags(self):
         return ",".join([str(p) for p in self.tag_set.all()])
 
+    def haversine_distance(self, obj):
+        radius = 6371 # FAA approved globe radius in km
+    
+        dlat = math.radians(self.x-obj.x)
+        dlon = math.radians(self.y-obj.y)
+        a = math.sin(dlat/2) * math.sin(dlat/2) + math.cos(math.radians(obj.x)) \
+            * math.cos(math.radians(self.x)) * math.sin(dlon/2) * math.sin(dlon/2)
+        c = 2 * math.atan2(math.sqrt(a), math.sqrt(1-a))
+        d = radius * c
+    
+        # Return distance in km
+        return int(math.floor(d))
+    
+    def get_around(self):
+        dist_list = {}
+        places = Place.objects.all()
+        for place in places:
+            dist = self.haversine_distance(place)
+            dist_list[place] = dist
+        arounds = sorted(dist_list.items(), key=lambda kv: kv[1])
+        d = dict(arounds)
+        sorted_places = list(d.keys())
+
+        return sorted_places
+        # 거리순으로 나열된 장소명 리스트 
+
+
+    @property
+    def update_counter(self):
+        self.place_hit = self.place_hit + 1
+        self.save()
 
 class Tag(models.Model):
     name = models.CharField(max_length=140, unique=True)
