@@ -1,4 +1,12 @@
+a{
+    color: rgb(116, 116, 116);
+    text-decoration: none;
+}
 
+a:hover{
+    color: rgb(60, 60, 60);
+    text-decoration: none;
+}
 .more-button{
     position: absolute;
     top: 30%;
