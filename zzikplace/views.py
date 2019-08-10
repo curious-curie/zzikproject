@@ -28,11 +28,16 @@ def detail(request, id=None):
         photo = request.FILES.get('photo', False)
         time = request.POST['time']
         tag_content = request.POST['tag_content']
-        place, is_place = Place.objects.get_or_create(address=address, tag_content = tag_content, title=title, x= x, y= y)
+        if Place.objects.filter(address = address):
+            place = Place.objects.get(address = address)
+            print(place)
+            place.tag_content += tag_content
+        else:
+            place, is_place =  Place.objects.get_or_create(address=address, tag_content = tag_content, title=title, x= x, y= y)
         id = place.id
         place.save()
         place.tag_save()
-        review = Review.objects.create(place_id=id, tip=tip, photo=photo, time=time, author=request.user)
+        review = Review.objects.create(place_id=id, tip=tip, tag_content = tag_content, photo=photo, time=time, author=request.user)
         review.save()
         return redirect('/reviews/detail/' + str(id))
 

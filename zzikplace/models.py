@@ -92,6 +92,7 @@ class Review(models.Model):
     liked_users = models.ManyToManyField(User, blank=True, related_name='reviews_liked', through='Like')
     photo = models.ImageField(upload_to='review_photos')
     time = models.CharField(max_length=1, choices=TIME_CHOICES)
+    tag_content = models.TextField(blank=True)
     created_at = models.DateTimeField(default=timezone.now)
     updated_at = models.DateTimeField(blank=True, null=True)
     
@@ -109,16 +110,6 @@ class Save(models.Model):
 
 class SearchWord(models.Model):
     searchword = models.CharField(max_length=30, blank=True)
-
-@receiver(post_save, sender=User)
-def create_user_profile(sender, instance, created, **kwargs):  
-    if created:
-        Profile.objects.create(user=instance)
-
-@receiver(post_save, sender=User)
-def save_user_profile(sender, instance, **kwargs):  
-    instance.profile.save()
-
 
 # @receiver(post_save, sender=User)
 # def create_user_profile(sender, instance, created, **kwargs):  

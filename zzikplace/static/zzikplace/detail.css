@@ -85,7 +85,7 @@ a:hover{
     /* grid-column-gap: 2%;  */
     grid-auto-rows: minmax(min-content, max-content);
     grid-row-gap: 10px;
-    margin-bottom: 50px;
+   
 }
 
 
@@ -246,4 +246,12 @@ a {
 
 .chart-wrap{
     opacity: 0.8;
+}
+
+#like-button{
+    border: 1px solid rgb(171, 171, 171);
+    border-radius: 10px;
+    padding-left: 5px;
+    padding-right: 5px;
+    padding-top: 3px; padding-bottom: 3px;
 }

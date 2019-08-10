@@ -67,15 +67,18 @@
             {% for review in place.review_set.all %}
             <div class="each_review">
                 <div class="review_photo"> <img src = "{{ review.photo.url}}"/></div>
-                <div class="review_content">{{ review.tip }}</div>
-                <a href="/reviews/detail/{{ review.id }}/like" style="float: left; font-size: 2px"> 
+                <div class="review_content">{{ review.tip }}
+                <div> {{ review.tag_content }}</div>
+                </div>
+            
+                <a href="/reviews/detail/{{ review.id }}/like" id="like-button" style="float: left; font-size: 2px"> 
                     {% if review in user.reviews_liked.all %}
                     좋아요 취소
                     {% else %} 
                     좋아요
                     {% endif%}
                 </a>
-                <p style="float: right; font-size: 1px; margin-right: 5px;"> 작성자: {{ review.author }}</p>
+                <p style="float: right; font-size: 1px; margin-right: 5px; margin-bottom: 0px;"> 작성자: {{ review.author }}</p>
             </div>
             {% endfor %} 
         </div>

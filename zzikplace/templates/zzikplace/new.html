@@ -79,7 +79,7 @@
 </div>
 
 
-<form action="/reviews/detail/" method="POST" enctype="multipart/form-data" >
+<form action="/reviews/detail/" id = "myform" method="POST" enctype="multipart/form-data" >
 {% csrf_token %}
 장소명 <input id = "selected_place_name" name = "place_name" readonly> <br>
 주소 <input id = "selected_place_addr" name = "place_addr" style="width: 400px;" readonly>
@@ -394,6 +394,16 @@ function readURL(input) {
 
 $("#pic_input").change(function() {
     readURL(this);
+});
+
+var myForm  = $('#myform');
+var myInput = $('#pic_input');
+
+myForm.on('submit', function(pEvent) {
+    if(myInput.val() === '') {
+        pEvent.preventDefault(); //Prevents the form to be sent
+        alert('사진을 업로드해주세요!');
+    }
 });
 
 </script>
