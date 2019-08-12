@@ -24,6 +24,16 @@ class ReviewAdmin(admin.ModelAdmin):
         return obj.place.id
     get_place_id.short_description = 'place_id'
 
+class TagAdmin(admin.ModelAdmin):
+    list_display = ['id', 'name', 'get_place_id', 'get_place_name']
+    def get_place_name(self, obj):
+        return obj.place.title
+    get_place_name.short_description = 'place_name'
+
+    def get_place_id(self, obj):
+        return obj.place.id
+    get_place_id.short_description = 'place_id'
+
 
 admin.site.register(Place, PlaceAdmin)
 admin.site.register(Review, ReviewAdmin)

@@ -19,7 +19,7 @@
      <div class = "info-bar">
         <div style="margin-bottom: 10px;"> 
         
-            <span id = "title">{{ place.title }}  </span> 
+            <span id = "title">{{ place.title }} </span> 
             <span id = "view"> <i class="fas fa-eye"></i> {{ place.place_hit }}<i class="fas fa-bookmark" style="margin-left: 10px;"></i> {{ place.saved_users.count }} </span> 
             <span id = "buttons">
  
@@ -68,9 +68,15 @@
             <div class="each_review">
                 <div class="review_photo"> <img src = "{{ review.photo.url}}"/></div>
                 <div class="review_content">{{ review.tip }}
-                <div> {{ review.tag_content }}</div>
+                    <div> 
+                    {% for tag in place.tag_set.all %}
+                        {% if tag.name in review.tag_content %}
+                            <a href="/reviews/tags/{{tag}}">#{{tag}}</a>
+                        {% endif %}
+                    {% endfor %}
+                    </div>
                 </div>
-            
+                <span class="like-count"> <i class="fas fa-heart"></i>{{ review.liked_users.count }} </span>
                 <a href="/reviews/detail/{{ review.id }}/like" id="like-button" style="float: left; font-size: 2px"> 
                     {% if review in user.reviews_liked.all %}
                     좋아요 취소
@@ -78,6 +84,7 @@
                     좋아요
                     {% endif%}
                 </a>
+                   
                 <p style="float: right; font-size: 1px; margin-right: 5px; margin-bottom: 0px;"> 작성자: {{ review.author }}</p>
             </div>
             {% endfor %} 

@@ -12,7 +12,6 @@ def around(request):
 
 def my(request):
     places = Place.objects.filter(saved_users = request.user)
-    print(places)
     return render(request, 'zzikplace/my.html', {'places' : places})
 
 def new(request):
@@ -86,3 +85,14 @@ def review_like(request, pk):
         Like.objects.create(user_id = request.user.id, review_id = review.id)
     next = request.META['HTTP_REFERER']
     return redirect (next)
+
+def tag_list(request, tag):
+    places = Place.objects.all()
+    tag_places = []
+    for place in places:
+        if place.tag_set.filter(name__contains = tag):
+            print(place.title)
+            tag_places.append(place)
+        elif tag in place.address:
+            tag_places.append(place)
+    return render(request, 'zzikplace/tags.html', {'places' : tag_places}, {'tag' : tag})

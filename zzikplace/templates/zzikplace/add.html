@@ -19,6 +19,8 @@
 {% csrf_token %}
 장소명 <input id = "selected_place_name" name = "place_name" value = "{{ place.title }}" readonly> <br>
 주소 <input id = "selected_place_addr" name = "place_addr" style="width: 400px;" value = "{{ place.address }}" readonly>
+<input id = "place_x" name="place_x" value = "{{ place.x }}" style="display: none;">
+<input id = "place_y" name="place_y" value = "{{ place.y}}" style="display: none;">
 </section>
 
 <section>
