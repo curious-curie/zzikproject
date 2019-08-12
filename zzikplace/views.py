@@ -41,16 +41,24 @@ def detail(request, id=None):
         return redirect('/reviews/detail/' + str(id))
 
     elif request.method == "GET":
+        # place = Place.objects.get(id=id)
+        # arounds  = place.get_around()
+        # first_around = arounds[1]
+        # second_around = arounds[2]
+        # return render(request, 'zzikplace/detail.html', {'place':place, 'first_around': first_around, 'second_around':second_around})
         place = Place.objects.get(id=id)
-        arounds  = place.get_around()
-        first_around = arounds[1]
-        second_around = arounds[2]
-        # d = dict(arounds)
-        # sorted_places = list(d.keys())
-        # first_around = sorted_places[1]
-        # second_around = sorted_places[2]
-        return render(request, 'zzikplace/detail.html', {'place':place, 'first_around': first_around, 'second_around':second_around})
-
+        arounds = place.get_around()
+        if len(arounds) < 3:
+            first_around = place
+            second_around = place
+            first_dist = 0
+            second_dist = 0
+        else:
+            first_around = arounds[1][0]
+            first_dist = arounds[1][1]
+            second_around = arounds[2][0]
+            second_dist = arounds[2][1]
+        return render(request, 'zzikplace/detail.html', {'place':place, 'first_around': first_around, 'first_dist': first_dist, 'second_around': second_around, 'second_dist' : second_dist})
 
 def add(request, id=None):
     if id:
@@ -95,4 +103,31 @@ def tag_list(request, tag):
             tag_places.append(place)
         elif tag in place.address:
             tag_places.append(place)
-    return render(request, 'zzikplace/tags.html', {'places' : tag_places}, {'tag' : tag})
+    return render(request, 'zzikplace/tags.html', {'places' : tag_places})
+
+
+
+def get_near_me(x, y):
+    dist_list = {}
+    places = Place.objects.all()
+    for place in places:
+        dist = distance(x,y, place)
+        if dist <= 10:
+            dist_list[place] = dist
+    arounds = sorted(dist_list.items(), key=lambda kv: kv[1])
+    d = dict(arounds)
+    near_me = list(d.keys())
+    return near_me
+    # 10km 이하, 거리순 
+
+def distance(x,y, obj):
+    radius = 6371 # FAA approved globe radius in km
+
+    dlat = math.radians(x-obj.x)
+    dlon = math.radians(y-obj.y)
+    a = math.sin(dlat/2) * math.sin(dlat/2) + math.cos(math.radians(obj.x)) \
+        * math.cos(math.radians(x)) * math.sin(dlon/2) * math.sin(dlon/2)
+    c = 2 * math.atan2(math.sqrt(a), math.sqrt(1-a))
+    d = radius * c
+
+    return int(math.floor(d))

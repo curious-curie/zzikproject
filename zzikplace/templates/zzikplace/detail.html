@@ -102,7 +102,7 @@
         </div>
 
         <div class ="around-container">
-            <span style="margin-bottom:20px;"> 주변 찍플 </span>
+            <span style="font-size: 30px; margin-bottom:20px;"> 주변 찍플 </span>
             <div>
                 <span id = "around-photo" class="photo-wrapper"> 
                     {% for review in first_around.review_set.all %}
@@ -114,7 +114,7 @@
                     {% endfor %}
                 </span>
                 <span id = "around-info">
-                    <div><a id = "around-name"  href = "/reviews/detail/{{first_around.id}}"> {{ first_around.title }} </a> </div>
+                    <div><a id = "around-name"  href = "/reviews/detail/{{first_around.id}}"> {{ first_around.title }} </a> {{ first_dist }} km</div>
                     <a id = "around-address"> {{ first_around.address }} </a>
                 </span>
             </div>
@@ -130,10 +130,30 @@
                     {% endfor %}
                 </span>
                 <span id = "around-info">
-                   <div><a id = "around-name"  href = "/reviews/detail/{{second_around.id}}"> {{ second_around.title }} </a> </div>
+                   <div><a id = "around-name"  href = "/reviews/detail/{{second_around.id}}"> {{ second_around.title }} </a> {{ second_dist }} km </div>
                     <a id = "around-address"> {{ second_around.address }} </a>
                 </span>
             </div>
+
+            {% comment %} {% for place, dist in dict.items %}
+                {% if forloop.counter == 2 or forloop.counter == 3 %}
+                <div>
+                    <span id = "around-photo" class="photo-wrapper">
+                        {% for review in place.review_set.all %}
+                            {% if forloop.counter < 2 %}
+                                <a href = "/reviews/detail/{{second_around.id}}">
+                                <img src = "{{review.photo.url}}">
+                                </a>
+                            {% endif %}
+                        {% endfor %}
+                    </span>
+                    <span id = "around-info">
+                    <div><a id = "around-name"  href = "/reviews/detail/{{place.id}}"> {{ second_around.title }} </a> </div>
+                        <a id = "around-address"> {{ second_around.address }} </a>
+                    </span>
+                </div>
+                {% endif %}
+            {% endfor %} {% endcomment %}
 
         </div>
 
