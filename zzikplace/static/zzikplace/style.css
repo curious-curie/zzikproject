@@ -16,24 +16,6 @@ li{
     font-size: 1.2vw;
 }
 
-.nav-container{
-    display: flex;
-    flex-direction: row;
-    width: 100%;
-    margin: 0;
-    padding: 0;
-    background-color: white;
-    list-style-type: none;
-    z-index: 1;
-    font-family: 'Nanum Gothic';
-}
-
-.nav-logo{
-    float: center;
-    margin: 5px;
-    padding: 5px;
-    cursor: pointer;
-}
 
 .nav-item{
     padding: 15px;
