@@ -43,14 +43,23 @@ def detail(request, id=None):
 
     elif request.method == "GET":
         place = Place.objects.get(id=id)
-        arounds  = place.get_around()
-        first_around = arounds[1]
-        second_around = arounds[2]
+
+        queryset = Review.objects.all().filter(place_id=id)
+        
+        a_number = queryset.filter(time="A").count()
+        b_number = queryset.filter(time="B").count()
+        c_number = queryset.filter(time="C").count()
+        d_number = queryset.filter(time="D").count()
+        e_number = queryset.filter(time="E").count()
+        timelist = [a_number, b_number, c_number, d_number, e_number]
+        #arounds  = place.get_around()
+        #first_around = arounds[1]
+        #second_around = arounds[2]
         # d = dict(arounds)
         # sorted_places = list(d.keys())
         # first_around = sorted_places[1]
         # second_around = sorted_places[2]
-        return render(request, 'zzikplace/detail.html', {'place':place, 'first_around': first_around, 'second_around':second_around})
+        return render(request, 'zzikplace/detail.html', {'place':place, 'timelist': timelist})
 
 
 def add(request, id=None):
@@ -86,3 +95,8 @@ def review_like(request, pk):
         Like.objects.create(user_id = request.user.id, review_id = review.id)
     next = request.META['HTTP_REFERER']
     return redirect (next)
+
+def place_unsave(request, pk):
+    place = Place.objects.get(id = pk)
+    place.delete()
+    return redirect('/reviews/my') 
