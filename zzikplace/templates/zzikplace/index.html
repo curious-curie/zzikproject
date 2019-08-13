@@ -27,19 +27,25 @@
 <div class = "container">
     <div class = "centered"> 
     <a class = "title">당신의 인생샷을 위한 포토스팟</a>
+        <form action="/zzikplace/findplace/" method="POST">
+        {% csrf_token %}
         <div class = "search-wrapper">
+        <form action="/reviews/findplace/" method="POST">
+        {% csrf_token %}
          <div class="input-holder">
-          <input type="text" class="search-input" placeholder="어디로 갈까요?"/>
-          <button class="search-icon" style = "background-color: transparent; border: none;"><img src = "https://www.konfest.com/wp-content/uploads/2019/05/Konfest-PNG-JPG-Image-Pic-Photo-Free-Download-Royalty-Unlimited-clip-art-sticker-icons-search-symbol-find-magnifying-glass-101.png", width ="20px"></button>
+          <input type="text" class="search-input" placeholder="어디로 갈까요?" name="search-word"/>
+          <button class="search-icon" style = "background-color: transparent; border: none;" onclick="location.href='zzikplace/findplace.html'"><img src = "https://www.konfest.com/wp-content/uploads/2019/05/Konfest-PNG-JPG-Image-Pic-Photo-Free-Download-Royalty-Unlimited-clip-art-sticker-icons-search-symbol-find-magnifying-glass-101.png", width ="20px"></button>
          </div>
+        </form>
         </div>
         <div class = "main-tags">
-         <button class = "place">#프라하</border>
+         <button class = "place">#광안리</border>
          <button class = "place">#서울숲</border>
          <button class = "place">#서울대학교</border>
          <button class = "place">#익선동</border>
-         <button class = "place">#세부</border>
+         <button class = "place">#전주한옥마을</border>
         </div> 
+        </form>
        
        
     </div>
@@ -80,5 +86,6 @@
 
 
  });
+
  </script>
 {% endblock content %} 

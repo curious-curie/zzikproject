@@ -1,8 +1,16 @@
+a{
+    color: rgb(116, 116, 116);
+    text-decoration: none;
+}
 
+a:hover{
+    color: rgb(60, 60, 60);
+    text-decoration: none;
+}
 .more-button{
     position: absolute;
-    left: 62%;
-    top: 13%;
+    top: 30%;
+    left:80%;
     padding: 2px 10px 2px;
     border-radius: 20px;
     color: white;
@@ -22,9 +30,9 @@
     display: grid;
     grid-template-columns: 75% 25%;
     grid-column-gap: 2%;
-    grid-row-gap: 0;
+    grid-row-gap: 2%;
     color: rgb(63, 63, 63);
-    grid-template-rows: minmax(100px, 400px);
+    grid-template-rows: minmax(100px, max-content);
 }
 
 .item {
@@ -44,7 +52,72 @@
 .review {
     grid-column: 1;
     grid-row: 2;
+    padding-bottom: 50px;
 }
+
+/*************** Yeji ****************/
+.review_infobar {
+    margin-bottom: 10px;
+    height: 40px;
+}
+
+#review_number {
+    float: left;
+    padding-left: 20px;
+    font-size: 1.8vw;
+    font-weight: 450;
+    margin-bottom: 10px;
+    padding-top: 20px;
+}
+
+#review_filter {
+    float: right;
+    padding-right: 20px;
+    padding-top: 20px;
+    font-size: 1vw;
+}
+
+.review_wrapper {
+    display: grid;
+    position: relative;
+    width: 100%;
+    grid-template-columns: 50% 50%;
+    /* grid-column-gap: 2%;  */
+    grid-auto-rows: minmax(min-content, max-content);
+    grid-row-gap: 10px;
+   
+}
+
+
+.each_review {
+    width: 90%;
+    margin:12px auto;
+    border: 1px solid lightgray;
+    border-radius: 15px;
+    padding: 12px;
+}
+
+/* .review_photo {
+    width: 100%;
+    padding-top: 100%;
+    margin-bottom: 16px;
+} */
+
+.review_photo img {
+    width: 80%;
+    position: relative;
+}
+
+.review_content {
+    padding: 12px;
+    position: relative;
+    min-height: 100px;
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+
+/************************************/
 
 .sidebar {
     margin-top: 30px;
@@ -92,9 +165,8 @@
 }
 
 .photo-wrapper{
+    position:relative;
     width: 100%;
-    margin-top: 10px;
-    margin-bottom: 0px;
     margin-left: 1%;
     overflow: hidden;
 }
@@ -116,7 +188,6 @@
 
 .photo-wrapper img{
     width: 100%;
-   
 }
 
 .map-container{
@@ -144,31 +215,49 @@
     text-align: left;
 }
 
-.around-container div{
-    margin-top: 10px;
-}
 
 #around-photo{
     background-color: pink;
-    width: 8vw;
-    height: 8vw;
+    width: 90%;
 }
 
 #around-info{
-    padding-top: 10px;
+    padding: 5px;
     margin-left: 5px;
-    width: 8vw;
+    margin-bottom: 20px;
 }
 
+a {
+    text-decoration: none;
+}
 #around-name{
-    font-size: 1.5vw;
+    color: rgb(58, 58, 58);
+    text-decoration: none;
+    line-height: 150%;
+    font-size: 1.3vw;
 }
 
 #around-address{
+    line-height: 120%;
     font-weight: normal;
     font-size: 0.9vw;
+
 }
 
 .chart-wrap{
     opacity: 0.8;
+}
+
+#like-button{
+    border: 1px solid rgb(171, 171, 171);
+    border-radius: 10px;
+    padding-left: 5px;
+    padding-right: 5px;
+    padding-top: 3px; padding-bottom: 3px;
+}
+
+.like-count{
+    text-align: left;
+    float: left;
+    margin-right: 10px;
 }
