@@ -70,7 +70,6 @@ def add(request, id=None):
 
 
 
-
 def places(request):
     places = Place.objects.all()
     return render(request, 'zzikplace/places.html', { 'places': places })
