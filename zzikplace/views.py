@@ -3,6 +3,7 @@ from django.shortcuts import redirect
 from django.views.generic.base import TemplateView
 from .models import Place, Review, Like, Save
 from django.contrib.auth.models import User
+import math
 
 def index(request):
     return render(request, 'zzikplace/index.html')
@@ -99,7 +100,6 @@ def tag_list(request, tag):
     tag_places = []
     for place in places:
         if place.tag_set.filter(name__contains = tag):
-            print(place.title)
             tag_places.append(place)
         elif tag in place.address:
             tag_places.append(place)
