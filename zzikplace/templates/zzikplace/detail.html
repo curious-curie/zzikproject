@@ -66,7 +66,7 @@
             {% for review in place.review_set.all %}
             <div class="each_review">
                 <div class="review_photo"> <img src = "{{ review.photo.url}}"/></div>
-                <div class="review_content">{{ review.tip }}
+                <div class="review_content">{{ review.tip }} 
                     <div> 
                     {% for tag in place.tag_set.all %}
                         {% if tag.name in review.tag_content %}
@@ -178,13 +178,12 @@ $(".more-button").click(function() {
 
 
 var ctx = document.getElementById('timeChart').getContext('2d');
-Chart.defaults.global.defaultFontSize = 20;
 var timeChart = new Chart(ctx, {
     type: 'bar',
     data: {
         labels: ['해뜰무렵', '한낮', '해질무렵', '️밤', '상관없음'],
         datasets: [{
-            backgroundColor: ['f1d4d4', 'salmon', 'lightpink', 'salmon','gray'],
+            backgroundColor: ['lavender', 'salmon', 'lightpink', 'salmon','gray'],
             data: {{ timelist }} 
         }]
     },

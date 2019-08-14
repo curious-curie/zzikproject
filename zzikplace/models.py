@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 from django.db.models.signals import post_save  # 추가
 from django.dispatch import receiver  
 from django.utils import timezone
-import re, cmath, math
+import re, math
 
 # class Profile(models.Model):   # 추가
 #     user = models.OneToOneField(User, on_delete=models.CASCADE)

@@ -14,7 +14,7 @@ body {
 }
 
 li{
-    font-size: 20px;
+    font-size: 15px;
 }
 
 
@@ -83,7 +83,7 @@ img{
 }
 
 .search-input{
-    font-size: 20px;
+    font-size: 15px;
     height: 2.5rem;
     border-radius: 13px;
     opacity: 0.7;
@@ -124,11 +124,9 @@ button:focus{
 
 .search-input:hover , .place:hover{
     text-decoration: none;
-    color: gray;
     font-weight: bold;
 }
 .top-search {
-    padding-top: 5px;
     border: medium;
     border-width: thin;
     position: relative;
