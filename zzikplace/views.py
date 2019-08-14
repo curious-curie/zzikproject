@@ -46,6 +46,26 @@ def detail(request, id=None):
         # second_around = arounds[2]
         # return render(request, 'zzikplace/detail.html', {'place':place, 'first_around': first_around, 'second_around':second_around})
         place = Place.objects.get(id=id)
+<<<<<<< HEAD
+
+        queryset = Review.objects.all().filter(place_id=id)
+        
+        a_number = queryset.filter(time="A").count()
+        b_number = queryset.filter(time="B").count()
+        c_number = queryset.filter(time="C").count()
+        d_number = queryset.filter(time="D").count()
+        e_number = queryset.filter(time="E").count()
+        timelist = [a_number, b_number, c_number, d_number, e_number]
+        #arounds  = place.get_around()
+        #first_around = arounds[1]
+        #second_around = arounds[2]
+        # d = dict(arounds)
+        # sorted_places = list(d.keys())
+        # first_around = sorted_places[1]
+        # second_around = sorted_places[2]
+        return render(request, 'zzikplace/detail.html', {'place':place, 'timelist': timelist})
+
+=======
         arounds = place.get_around()
         if len(arounds) < 3:
             first_around = place
@@ -58,6 +78,7 @@ def detail(request, id=None):
             second_around = arounds[2][0]
             second_dist = arounds[2][1]
         return render(request, 'zzikplace/detail.html', {'place':place, 'first_around': first_around, 'first_dist': first_dist, 'second_around': second_around, 'second_dist' : second_dist})
+>>>>>>> 2c368993e3711e2670844ebbedd47bbcde3dbd5b
 
 def add(request, id=None):
     if id:
@@ -106,6 +127,12 @@ def review_like(request, pk):
     next = request.META['HTTP_REFERER']
     return redirect (next)
 
+<<<<<<< HEAD
+def place_unsave(request, pk):
+    place = Place.objects.get(id = pk)
+    place.delete()
+    return redirect('/reviews/my') 
+=======
 def tag_list(request, tag):
     places = Place.objects.all()
     tag_places = []
@@ -143,3 +170,4 @@ def distance(x,y, obj):
 
     return int(math.floor(d))
 
+>>>>>>> 2c368993e3711e2670844ebbedd47bbcde3dbd5b
