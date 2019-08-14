@@ -49,9 +49,6 @@
             <button class = "more-button" style="color:white;">사진 더보기</button>
         </div> 
     
-        <div class = "chart-wrap" style="width: 250px; height: 10px;">
-        <p> 해 뜰 무렵 : {{ timelist.0 }}, 한 낮 : {{ timelist.1 }}, 해 질 무렵 : {{ timelist.2 }}, 밤: {{ timelist.3 }}, 시간이 상관없어요: {{ timelist.4 }}</p>
-        </div> 
       </div>
     </div>
 
@@ -100,11 +97,16 @@
 
     <div class="item sidebar">
         <div class="map-container">
-            <div id="map" style="width:100%;height:20vw;"></div>
+            <div id="map" style="width:100%; height: 300px;"></div>
+        </div>
+
+        <div class ="timelist-container">
+        <span style="font-size: 20px;"> 사진 찍기 좋은 시간 </span>
+            <canvas id="timeChart"></canvas>
         </div>
 
         <div class ="around-container">
-            <span style="font-size: 30px; margin-bottom:20px;"> 주변 찍플 </span>
+            <span style="font-size: 24px; margin-bottom:20px;"> 주변 찍플 </span>
             <div>
                 <span id = "around-photo" class="photo-wrapper"> 
                     {% for review in first_around.review_set.all %}
@@ -173,16 +175,17 @@ $(".more-button").click(function() {
     }, 500);
 });
 
-{% comment %} 
+
 
 var ctx = document.getElementById('timeChart').getContext('2d');
+Chart.defaults.global.defaultFontSize = 20;
 var timeChart = new Chart(ctx, {
     type: 'bar',
     data: {
         labels: ['해뜰무렵', '한낮', '해질무렵', '️밤', '상관없음'],
         datasets: [{
             backgroundColor: ['f1d4d4', 'salmon', 'lightpink', 'salmon','gray'],
-            data: [1,2,3,4,5]
+            data: {{ timelist }} 
         }]
     },
     
@@ -193,7 +196,7 @@ var timeChart = new Chart(ctx, {
             barPercentage: 0.6,
             categoryPercentage: 0.7,
             ticks: {
-            fontSize: 10
+            fontSize: 13
             }
           }],
           yAxes: [{
@@ -209,7 +212,7 @@ var timeChart = new Chart(ctx, {
         }
         
     }
-}); {% endcomment %}
+});
 </script>
 
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=64ecc30ef2f8d205d1168dea4d7ded6d&libraries=services"></script>

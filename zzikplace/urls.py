@@ -9,12 +9,9 @@ urlpatterns = [
     path('around', views.around, name = 'around'),
     path('new/', views.new, name='new'),
     path('my/', views.my, name='my'),
-<<<<<<< HEAD
     path('my/<int:pk>/delete/', views.place_unsave, name='unsave'),
-=======
     path('myposts/', views.myposts, name='myposts'),
     path('myposts/<int:id>/delete', views.myposts_delete, name='myposts_delete'),
->>>>>>> 2c368993e3711e2670844ebbedd47bbcde3dbd5b
     path('places', views.places, name='places'),
     path('detail/', views.detail, name='detail'),
     path('detail/<int:id>/', views.detail, name='detail'),

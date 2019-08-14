@@ -67,7 +67,6 @@ class Place(models.Model):
         # 거리순으로 나열된 장소명 리스트 
 
 
-
     @property
     def update_counter(self):
         self.place_hit = self.place_hit + 1
