@@ -43,9 +43,11 @@
       <li class="nav-item">
         <a class="nav-link active" href="#">내주변📍</a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link active" href="/reviews/my">MY찍플</a>
-      </li>  
+      {% if  user.is_authenticated %}
+        <li class="nav-item">
+          <a class="nav-link active" href="/reviews/my">MY찍플</a>
+        </li>  
+      {% endif %}
       <li class="nav-item">
         <a class="nav-link active" href="/reviews/new/" style="color:salmon; font-weight:bold;">리뷰 쓰기</a>
       </li>   

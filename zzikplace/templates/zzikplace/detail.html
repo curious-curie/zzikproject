@@ -20,7 +20,7 @@
         <div style="margin-bottom: 10px;"> 
         
             <span id = "title">{{ place.title }} </span> 
-            <span id = "view"> <i class="fas fa-eye"></i> {{ place.place_hit }}<i class="fas fa-bookmark" style="margin-left: 10px;"></i> {{ place.saved_users.count }} </span> 
+            <span id = "view"> <i class="fas fa-eye"></i> {{ place.place_hit }} <i class="fas fa-bookmark" style="margin-left: 10px;"></i> {{ place.saved_users.count }} </span> 
             <span id = "buttons">
  
                 {% if user.is_authenticated %}
@@ -31,9 +31,10 @@
                             <i class="far fa-bookmark" style="margin-right: 10px;"></i>
                         {% endif %}
                     </a>
+                   <a href="add"> <i class="fas fa-pen"></i> </a> 
                 {% endif %}
   
-                <a href="add"> <i class="fas fa-pen"></i> </a>    
+            
             </span>
         </div>
         <div id="address"> {{ place.address }} </div>

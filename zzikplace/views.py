@@ -82,6 +82,7 @@ def myposts(request):
 
 def myposts_delete(request, id):
     review = Review.objects.get(id=id)
+    # 여기서 플레이스 삭제하는 함수 추가 
     review.delete()
     return redirect('/reviews/myposts')
     
