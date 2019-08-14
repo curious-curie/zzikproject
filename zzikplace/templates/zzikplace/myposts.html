@@ -28,8 +28,13 @@
       <div class="caption">
         <div style="font-weight:bold; font-size:20px;">  {{review.place.title}}  </div>  
         <div> {{ review.place.address }} </div>
-        <div class="review-box"> {{ review.tip }} </div>
-        <i class="fas fa-trash-alt fa-lg" id="delete"></i>
+        {% if review.tip == "" %}
+        {% else %}
+          <div class="review-box"> {{ review.tip }} </div>
+        {% endif %}
+        
+        <a href="/reviews/myposts/{{ review.id }}/delete" onclick="return confirm('정말 삭제하시겠습니까?')">
+        <i class="fas fa-trash-alt fa-lg" id="delete"></i></a>
       </div>
     </div>
   

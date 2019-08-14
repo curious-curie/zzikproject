@@ -80,6 +80,11 @@ def myposts(request):
     reviews = Review.objects.filter(author = request.user)
     return render(request, 'zzikplace/myposts.html', {'reviews' : reviews})
 
+def myposts_delete(request, id):
+    review = Review.objects.get(id=id)
+    review.delete()
+    return redirect('/reviews/myposts')
+    
 def place_save(request, pk):
     place = Place.objects.get(id = pk)
     save_list = place.save_set.filter(user_id = request.user.id)
