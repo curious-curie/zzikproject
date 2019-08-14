@@ -1,4 +1,3 @@
-
 {% extends 'base.html' %} 
 {% load staticfiles%}
 {% block content %}
@@ -14,7 +13,10 @@
 
 <body>
 
+
+<div style="margin-top: 40px; font-weight:bold; font-size:2rem; color:gray; text-align:center">#{{ request.path|cut:'/reviews/tags/'|slice:":-1"}} </div>
 <div class="wrapper">
+
 {% for place in places %} 
   <div class="item">
    
@@ -22,15 +24,15 @@
     <a href="/reviews/detail/{{place.id}}">
       {% for review in place.review_set.all %}
            {% if forloop.counter < 2 %}
-                <img class="review-img" src = "{{review.photo.url}}">
+                <img src = "{{review.photo.url}}">
            {% endif %}
       {% endfor %}   
     </a>
       <div class="caption">
         <div style="font-weight:bold; font-size:20px;">  {{place.title}}  </div>   
-        <div><span> {{place.address}}</span></div>
-  
-        <i class="fas fa-trash-alt fa-lg" id="delete"></i>
+        <div>  {{place.address}}
+        <i class="fas fa-trash-alt fa-lg"></i>
+        </div>
       </div>
     </div>
   

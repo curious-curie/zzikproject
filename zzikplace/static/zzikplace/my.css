@@ -2,21 +2,24 @@
 * {
     box-sizing: border-box;
     font-family: 'Nanum Gothic';
+    word-break:break-all;
   }
 
 
   body {
-
     background-color: whitesmoke;
     background-size: 10px 10px;
   }
 
-  img {
-    max-width: 100%;
-    margin-bottom: 10px;
-  }
 
+
+  .wrapper img {
+    width: 100%;
+    margin-bottom:15px;
+  }
   .wrapper {
+    display: flex;
+    justify-content: center;
     width: 100%;
     padding: 3rem;
     text-align: center;
@@ -24,14 +27,29 @@
 
   .polaroid {
     background: #fff;
-    padding: 0.75rem;
+    padding: 15px;
+    padding-bottom: 25px;
     width: 100%;
     box-shadow: 0 0.25rem 0.25rem rgba(0,0,0,0.2);
   }
+
+  .myposts-polaroid {
+    background: #fff;
+    padding: 15px;
+    padding-bottom: 25px;
+    width: 100%;
+    box-shadow: 0 0.25rem 0.25rem rgba(0,0,0,0.2);
+  }
+
+  .review-box{
+    width: 80%;
+    margin-top: 15px;
+    background-color: rgb(205, 229, 239);
+    padding: 10px;
+    border-radius: 15px;
+  }
   .caption {
     margin-left: 5%;
-    width: 276px;
-    height: 50px;
     text-align: left;
     color: grey;
     margin-bottom: 10px;
@@ -48,4 +66,8 @@
     margin-top: 10px;
     position: absolute;
     left: 90%;
+  }
+
+  #delete{
+    float: right;
   }

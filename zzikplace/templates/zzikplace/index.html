@@ -16,9 +16,9 @@
 <div class = "slide">
     <img class = "arrow" id="back" src="{% static 'zzikplace/img/back.png' %}">
     <ul>
-    <li><img src="{% static 'zzikplace/img/main1.jpg' %}" width = "100%"></li>
+    <li><img src="{% static 'static/zzikplace/img/main1.jpg' %}" width = "100%"></li>
     <li><img src="{% static 'zzikplace/img/main2.jpg' %}" width = "100%"></li>
-    <li><img src="{% static 'zzikplace/img/main.jpg' %}" width = "100%"></li>
+    <li><img src="{% static '../zzikplace/static/zzikplace/img/main.jpg' %}" width = "100%"></li>
     </ul>
     <img class = "arrow" id="next" src="{% static 'zzikplace/img/next.png' %}">
 </div>
@@ -26,7 +26,7 @@
 
 <div class = "container">
     <div class = "centered"> 
-    <a class = "title">당신의 인생샷을 위한 포토스팟</a>
+    <div class = "title">당신의 인생샷을 위한 포토스팟</div>
         <form action="/zzikplace/findplace/" method="POST">
         {% csrf_token %}
         <div class = "search-wrapper">
@@ -39,11 +39,11 @@
         </form>
         </div>
         <div class = "main-tags">
-         <button class = "place">#프라하</border>
-         <button class = "place">#서울숲</border>
-         <button class = "place">#서울대학교</border>
-         <button class = "place">#익선동</border>
-         <button class = "place">#세부</border>
+         <a href= "#" class = "place">#광안리</a>
+         <a href= "#" class = "place">#서울숲</a>
+         <a href= "#" class = "place">#서울대학교</a>
+         <a href= "#" class = "place">#익선동</a>
+         <a href= "#" class = "place">#전주한옥마을</a>
         </div> 
         </form>
        
