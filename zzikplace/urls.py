@@ -21,3 +21,4 @@ urlpatterns = [
     path('tags/<str:tag>/', views.tag_list, name='tag_list'),
 ]
 
+
