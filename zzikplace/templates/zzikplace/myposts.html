@@ -14,22 +14,20 @@
 
 <body>
 
+
+<div style="margin-top: 40px; font-weight:bold; font-size:2rem; color:gray; text-align:center"> 내가 쓴 리뷰 </div>
+<div style="font-weight:bold; font-size:1.5rem; color:gray; text-align:center"> Total :  {{reviews.count}}</div>
 <div class="wrapper">
-{% for place in places %} 
+{% for review in reviews %} 
   <div class="item">
    
     <div class="polaroid">
-    <a href="/reviews/detail/{{place.id}}">
-      {% for review in place.review_set.all %}
-           {% if forloop.counter < 2 %}
-                <img class="review-img" src = "{{review.photo.url}}">
-           {% endif %}
-      {% endfor %}   
+    <a href="/places/detail/{{review.place.id}}">
+         <img class="review-img" src = "{{review.photo.url}}">
     </a>
       <div class="caption">
-        <div style="font-weight:bold; font-size:20px;">  {{place.title}}  </div>   
-        <div><span> {{place.address}}</span></div>
-  
+        <div style="font-weight:bold; font-size:20px;">  {{review.place.title}}  </div>   
+        <span> {{review.content}}</span>
         <i class="fas fa-trash-alt fa-lg" id="delete"></i>
       </div>
     </div>

@@ -9,6 +9,7 @@ urlpatterns = [
     path('around', views.around, name = 'around'),
     path('new/', views.new, name='new'),
     path('my/', views.my, name='my'),
+    path('myposts/', views.myposts, name='myposts'),
     path('places', views.places, name='places'),
     path('detail/', views.detail, name='detail'),
     path('detail/<int:id>/', views.detail, name='detail'),

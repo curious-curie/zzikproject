@@ -5,6 +5,7 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
   <link  rel="stylesheet"  href="{% static 'zzikplace/style.css' %}"/>
   <title>찍플</title>  
@@ -51,8 +52,9 @@
  
 
       <div class = "top-search">
-      <input type="text" class="search-input" placeholder="장소/테마 검색" style="border:solid; border-width: 1px; border-color: lightgrey; width: 260px; height: 30px;"/>
-      <button class="search-icon" style = "background-color: transparent; border: none; position: relative; left: -15%; top:-2.5%;"><img src = "https://www.konfest.com/wp-content/uploads/2019/05/Konfest-PNG-JPG-Image-Pic-Photo-Free-Download-Royalty-Unlimited-clip-art-sticker-icons-search-symbol-find-magnifying-glass-101.png", width ="20px"></button>
+      <input type="text" class="search-input" placeholder="장소/테마 검색" style="border:solid; border-width: 1px; border-color: lightgrey; width: 260px; height: 35px;"/>
+      {% comment %} <a href="#"><i class="fas fa-search lg" style="color: gray;"></i> </a> {% endcomment %}
+      <button class="search-icon" style = "background-color: transparent; border: none;" onclick="location.href='zzikplace/findplace.html'"><img src = "https://www.konfest.com/wp-content/uploads/2019/05/Konfest-PNG-JPG-Image-Pic-Photo-Free-Download-Royalty-Unlimited-clip-art-sticker-icons-search-symbol-find-magnifying-glass-101.png", width ="20px"></button>
       </div>
   
       {% comment %} <li class="nav-item dropdown">

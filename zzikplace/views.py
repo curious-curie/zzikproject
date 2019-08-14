@@ -11,9 +11,7 @@ def index(request):
 def around(request):
     return render(request, 'zzikplace/index.html')
 
-def my(request):
-    places = Place.objects.filter(saved_users = request.user)
-    return render(request, 'zzikplace/my.html', {'places' : places})
+
 
 def new(request):
     return render(request, 'zzikplace/new.html')
@@ -74,6 +72,14 @@ def places(request):
     places = Place.objects.all()
     return render(request, 'zzikplace/places.html', { 'places': places })
 
+def my(request):
+    places = Place.objects.filter(saved_users = request.user)
+    return render(request, 'zzikplace/my.html', {'places' : places})
+
+def myposts(request):
+    reviews = Review.objects.get(author = request.user)
+    return render(request, 'zzikplace/myposts.html', {'reviews' : reviews})
+
 def place_save(request, pk):
     place = Place.objects.get(id = pk)
     save_list = place.save_set.filter(user_id = request.user.id)
@@ -130,3 +136,4 @@ def distance(x,y, obj):
     d = radius * c
 
     return int(math.floor(d))
+

@@ -14,7 +14,6 @@
 
 <body>
 
-
 <div style="margin-top: 40px; font-weight:bold; font-size:2rem; color:gray; text-align:center"> 저장한 장소 목록  </div>
 <div style="font-weight:bold; font-size:1.5rem; color:gray; text-align:center"> Total : {{ user.places_saved.count }} </div>
 <div class="wrapper">
@@ -25,14 +24,14 @@
     <a href="/reviews/detail/{{place.id}}">
       {% for review in place.review_set.all %}
            {% if forloop.counter < 2 %}
-                <img src = "{{review.photo.url}}">
+                <img class="review-img" src = "{{review.photo.url}}">
            {% endif %}
       {% endfor %}   
     </a>
       <div class="caption">
         <div style="font-weight:bold; font-size:20px;">  {{place.title}}  </div>   
         <span> {{place.address}}</span>
-        <i class="fas fa-trash-alt fa-lg"></i>
+        <i class="fas fa-trash-alt fa-lg" id="delete"></i>
       </div>
     </div>
   

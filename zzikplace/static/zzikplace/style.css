@@ -63,11 +63,11 @@ img{
 }
 
 .title{
-    font-weight: 500;
     width: 100%;
     color: white; 
-    font-size: 45px;
-    text-shadow:1px 1px 7px #5b5b5b;
+    font-size: 50px;
+    text-shadow:1px 1px 5px #5b5b5b;
+
 }
 
 .search-wrapper {
@@ -77,7 +77,12 @@ img{
     left:50%;
 }
 
+.input-holder{
+    margin-top: 20px;
+}
+
 .search-input{
+    font-size: 20px;
     height: 2.5rem;
     border-radius: 13px;
     opacity: 0.7;
@@ -86,9 +91,8 @@ img{
 }
 
 .search-icon{
-    position: absolute;
-    top: 15%;
-    left: 85%;
+    position: relative;
+    left: -15%;
     height: 30px;
     width: 30px;
     outline: none;
@@ -102,17 +106,26 @@ button:focus{
 .main-tags{
     position: relative;
     top: 50px;
+    margin: 30px;
 }
 
 .place{
+    font-size: 20px;
+    background-color: white;
+    color:gray;
     border-radius: 15px;
     margin: 5px;
     border: none;
     opacity: 0.8;
-    padding: 5px;
+    padding: 10px;
     
 }
 
+.search-input:hover , .place:hover{
+    text-decoration: none;
+    color: gray;
+    font-weight: bold;
+}
 .top-search {
     padding-top: 5px;
     border: medium;
