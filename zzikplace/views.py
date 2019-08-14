@@ -77,7 +77,7 @@ def my(request):
     return render(request, 'zzikplace/my.html', {'places' : places})
 
 def myposts(request):
-    reviews = Review.objects.get(author = request.user)
+    reviews = Review.objects.filter(author = request.user)
     return render(request, 'zzikplace/myposts.html', {'reviews' : reviews})
 
 def place_save(request, pk):

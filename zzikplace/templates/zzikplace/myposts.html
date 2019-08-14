@@ -21,13 +21,14 @@
 {% for review in reviews %} 
   <div class="item">
    
-    <div class="polaroid">
+    <div class="myposts-polaroid">
     <a href="/places/detail/{{review.place.id}}">
          <img class="review-img" src = "{{review.photo.url}}">
     </a>
       <div class="caption">
-        <div style="font-weight:bold; font-size:20px;">  {{review.place.title}}  </div>   
-        <span> {{review.content}}</span>
+        <div style="font-weight:bold; font-size:20px;">  {{review.place.title}}  </div>  
+        <div> {{ review.place.address }} </div>
+        <div class="review-box"> {{ review.tip }} </div>
         <i class="fas fa-trash-alt fa-lg" id="delete"></i>
       </div>
     </div>
