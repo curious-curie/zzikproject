@@ -74,7 +74,7 @@ def places(request):
     places = Place.objects.all()
     featured = []
     for place in places:
-        if place.saved_users.count() > 0:
+        # if place.saved_users.count() > 0:
             featured.append(place)
 
     return render(request, 'zzikplace/places.html', { 'places': featured })
