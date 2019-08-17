@@ -195,3 +195,4 @@ def findplace(request):
             elif searchword in place.address:
                 tag_places.append(place)
         return render(request, 'zzikplace/findplace.html', {'searchword' : searchword, 'places' : tag_places})
+
