@@ -23,6 +23,8 @@ def new(request):
     return render(request, 'zzikplace/new.html')
 
 def detail(request, id=None):
+    reviews = Review.objects.filter(place_id=id)
+    sort = request.GET.get('sort', '')
     if request.method == "POST":
         title = request.POST['place_name']
         address = request.POST['place_addr']
@@ -67,7 +69,12 @@ def detail(request, id=None):
             first_dist = arounds[1][1]
             second_around = arounds[2][0]
             second_dist = arounds[2][1]
-        return render(request, 'zzikplace/detail.html', {'place':place, 'timelist': timelist, 'first_around': first_around, 'first_dist': first_dist, 'second_around': second_around, 'second_dist' : second_dist})
+        
+        if sort == 'likes':
+            reviews = Review.objects.filter(place_id=id).order_by('-liked_users', '-created_at')
+            return render(request, 'zzikplace/detail.html', {'place':place, 'timelist': timelist, 'first_around': first_around, 'first_dist': first_dist, 'second_around': second_around, 'second_dist' : second_dist, 'reviews': reviews })
+        else: 
+            return render(request, 'zzikplace/detail.html', {'place':place, 'timelist': timelist, 'first_around': first_around, 'first_dist': first_dist, 'second_around': second_around, 'second_dist' : second_dist, 'reviews': reviews })
 
 def add(request, id=None):
     if id:
@@ -194,5 +201,4 @@ def findplace(request):
                 tag_places.append(place)
             elif searchword in place.address:
                 tag_places.append(place)
-        return render(request, 'zzikplace/findplace.html', {'searchword' : searchword, 'places' : tag_places})
-
+        return render(request, 'zzikplace/findplace.html', {'searchword' : searchword, 'places' : tag_places})    

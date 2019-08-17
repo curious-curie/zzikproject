@@ -12,7 +12,6 @@
 
 <body>
 
-
 <div class="container">
 {{ place.update_counter|default_if_none:''}}
     <div class="item place-info">
@@ -58,12 +57,15 @@
 
         <div class="review_infobar">
             <span id="review_number"> 리뷰({{place.review_set.count}}) </span>
-            <span id="review_filter"> 필터: 최신순/좋아요순 </span>
+            <select id="sort-select" onchange="location = this.value;">
+              <option class="sort-date" value="?sort=recents">최신순</option>
+              <option class="sort-likes" value="?sort=likes">좋아요순</option>
+            </select>
         </div>
 
         <div class="review_wrapper"> 
 
-            {% for review in place.review_set.all %}
+            {% for review in reviews %}
             <div class="each_review">
                 <div class="review_photo"> <img src = "{{ review.photo.url}}"/></div>
                 <div class="review_content">{{ review.tip }} 
@@ -90,9 +92,6 @@
         </div>
 
     </div>
-
-
-
 
 
     <div class="item sidebar">
@@ -212,6 +211,31 @@ var timeChart = new Chart(ctx, {
         
     }
 });
+
+var getUrlParameter = function getUrlParameter(sParam) {
+    var sPageURL = decodeURIComponent(window.location.search.substring(1)),
+        sURLVariables = sPageURL.split('&'),
+        sParameterName,
+        i;
+
+    for (i = 0; i < sURLVariables.length; i++) {
+        sParameterName = sURLVariables[i].split('=');
+
+        if (sParameterName[0] === sParam) {
+            return sParameterName[1] === undefined ? true : sParameterName[1];
+        }
+    }
+};
+
+$(document).ready(function(){
+  var sort = getUrlParameter('sort');
+  if(sort == 'likes'){
+    $('.sort-likes').prop('selected', 'selected');
+  }else{
+    $('.sort-date').prop('selected', 'selected')
+  }
+});
+
 </script>
 
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=64ecc30ef2f8d205d1168dea4d7ded6d&libraries=services"></script>
