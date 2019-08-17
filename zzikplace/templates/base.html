@@ -13,7 +13,6 @@
 
 <body>
 
- 
 <nav class="navbar navbar-expand-sm navbar-light bg-white effect" style= "height: 60px; z-index:1;">
   <a class="navbar-brand" href="/"> <img src = "https://user-images.githubusercontent.com/47528556/59990462-39b94680-967e-11e9-8409-23d446748f7e.png" width ="50px" align="center"></a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -26,7 +25,7 @@
         <a class="nav-link active" href="/reviews/places">인기찍플</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link active" href="#">내주변📍</a>
+        <a class="nav-link active" href="/reviews/around">내주변📍</a>
       </li>
       {% if  user.is_authenticated %}
         <li class="nav-item">
@@ -68,7 +67,7 @@
        
         <a class="nav-link" href="/accounts/logout">로그아웃</a>
         <a class = "nav-link">
-        {{ user.get_username }}님, 안녕하세요!</a>
+        {{ user.profile.nickname }}님, 안녕하세요!</a>
          {% else %}
 
         <a class="nav-link" href="/accounts/login">로그인</a>

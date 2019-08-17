@@ -1,6 +1,10 @@
 from django.contrib import admin
 from .models import Place
 from .models import Review, Tag, Like, Save
+from django.contrib.auth.models import User
+from accounts.models import Profile
+# Register your models here.
+
 
 class ReviewInline(admin.TabularInline):
     model = Review
@@ -40,4 +44,3 @@ admin.site.register(Review, ReviewAdmin)
 admin.site.register(Tag)
 admin.site.register(Save)
 admin.site.register(Like)
-
