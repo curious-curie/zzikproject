@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.shortcuts import redirect
 from django.views.generic.base import TemplateView
-from .models import Place, Review, Like, Save
+from .models import Place, Review, Like, Save, SearchWord
 from django.contrib.auth.models import User
 import math
 
@@ -157,3 +157,10 @@ def distance(x,y, obj):
 
     return int(math.floor(d))
 
+def findplace(request):
+    if request.method == 'POST':
+        searchword = request.POST['search-word']
+        SearchWord.objects.create(searchword=searchword)
+        searchwords = SearchWord.objects.last()
+        searchplace = searchwords.searchword
+    return redirect('/reviews/tags/' + str(searchplace))
