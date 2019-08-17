@@ -172,7 +172,6 @@ def distance(x,y, obj):
 def findplace(request):
     if request.method == 'POST':
         searchword = request.POST['search-word']
-  
         places = Place.objects.all()
         tag_places = []
         for place in places:
