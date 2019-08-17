@@ -19,9 +19,10 @@
   }
   .wrapper {
     display: flex;
+    flex-wrap: wrap;
     justify-content: center;
     width: 100%;
-    padding: 3rem;
+    padding: 20px;
     text-align: center;
   }
 
@@ -42,7 +43,7 @@
   }
 
   .review-box{
-    width: 80%;
+    width: 90%;
     margin-top: 15px;
     background-color: rgb(205, 229, 239);
     padding: 10px;
@@ -71,3 +72,32 @@
   #delete{
     float: right;
   }
+
+  .my-button-wrapper{
+    margin: 20px;
+    float: center;
+    text-align: center;
+  }
+
+  .my-button{
+    font-size: 20px;
+    padding: 10px;
+    background-color: rgb(142, 173, 221);
+    border-radius: 10px;
+    color: white;
+    margin-right: 10px;
+    margin-left: 10px;
+  }
+
+  .my-button:hover{
+
+    background-color: rgb(74, 124, 199);
+    text-decoration: none;
+    color: white;
+  
+  }
+
+  .selected{
+    background-color: rgb(74, 124, 199);
+  }
+
