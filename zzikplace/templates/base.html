@@ -38,9 +38,12 @@
  
 
       <div class = "top-search">
-      <input type="text" class="search-input" placeholder="장소/테마 검색" style="border:solid; border-width: 1px; border-color: lightgrey; width: 260px; height: 35px;"/>
+      <form action="/reviews/findplace/" method="POST">
+      {% csrf_token %}
+      <input type="text" class="search-input" name = "search-word" placeholder="장소/테마 검색" style="border:solid; border-width: 1px; border-color: lightgrey; width: 260px; height: 35px;"/>
       {% comment %} <a href="#"><i class="fas fa-search lg" style="color: gray;"></i> </a> {% endcomment %}
       <button class="search-icon" style = "background-color: transparent; border: none;" onclick="location.href='zzikplace/findplace.html'"><img src = "https://www.konfest.com/wp-content/uploads/2019/05/Konfest-PNG-JPG-Image-Pic-Photo-Free-Download-Royalty-Unlimited-clip-art-sticker-icons-search-symbol-find-magnifying-glass-101.png", width ="20px"></button>
+      </form>
       </div>
   
       {% comment %} <li class="nav-item dropdown">

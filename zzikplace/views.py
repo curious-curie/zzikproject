@@ -5,12 +5,19 @@ from .models import Place, Review, Like, Save, SearchWord
 from django.contrib.auth.models import User
 from django.db.models import Count
 import math
+from math import radians, cos, sin, asin, sqrt
 
 def index(request):
     return render(request, 'zzikplace/index.html')
 
 def around(request):
-    return render(request, 'zzikplace/around.html')
+    all = Place.objects.all()
+    user_place = Place.objects.last()
+
+    places = get_near_me(user_place.x, user_place.y)
+    print(places)
+
+    return render(request, 'zzikplace/around.html', { 'places' : places })
 
 def new(request):
     return render(request, 'zzikplace/new.html')
@@ -80,13 +87,18 @@ def places(request):
     
     sort = request.GET.get('sort', '')
     if sort == 'saves':
-        places = Place.objects.annotate(save_count = Count('saved_users')).order_by('-save_count', '-created_at')
-        return render(request, 'zzikplace/places.html', { 'places': places })
+        # saves = {}
+        # saved_list = []
+        # for place in places:
+        #     saves.update({ place : place.saved_users.count()})
+        # saves_dict =  (sorted(saves.items(), key=lambda kv: kv[1], reverse=True))
+        # for item in saves_dict:
+        #     saved_list.append(item[0])
+        saved_list = Place.objects.annotate(saved_count = Count('saved_users')).order_by('-saved_count')
+        return render(request, 'zzikplace/places.html', { 'places': saved_list })
     elif sort == 'views':
-        places = Place.objects.annotate(views_count = Count('place_hit')).order_by('-views_count', '-created_at')
-        for place in places:
-            print(place.title)
-            print(place.views_count)
+        places = Place.objects.order_by('-place_hit', '-created_at')
+
         return render(request, 'zzikplace/places.html', {'places': places })
     else: 
         return render(request, 'zzikplace/places.html', { 'places': places })
@@ -148,26 +160,29 @@ def get_near_me(x, y):
     dist_list = {}
     places = Place.objects.all()
     for place in places:
-        dist = distance(x,y, place)
+        dist = haversine(x,y, place.x, place.y)
         if dist <= 10:
-            dist_list[place] = dist
+            dist_list[place] = round(dist,2)
     arounds = sorted(dist_list.items(), key=lambda kv: kv[1])
-    d = dict(arounds)
-    near_me = list(d.keys())
-    return near_me
+    return arounds
     # 10km 이하, 거리순 
 
-def distance(x,y, obj):
-    radius = 6371 # FAA approved globe radius in km
 
-    dlat = math.radians(x-obj.x)
-    dlon = math.radians(y-obj.y)
-    a = math.sin(dlat/2) * math.sin(dlat/2) + math.cos(math.radians(obj.x)) \
-        * math.cos(math.radians(x)) * math.sin(dlon/2) * math.sin(dlon/2)
-    c = 2 * math.atan2(math.sqrt(a), math.sqrt(1-a))
-    d = radius * c
+def haversine(lon1, lat1, lon2, lat2):
+    """
+    Calculate the great circle distance between two points 
+    on the earth (specified in decimal degrees)
+    """
+    # convert decimal degrees to radians 
+    lon1, lat1, lon2, lat2 = map(radians, [lon1, lat1, lon2, lat2])
 
-    return int(math.floor(d))
+    # haversine formula 
+    dlon = lon2 - lon1 
+    dlat = lat2 - lat1 
+    a = sin(dlat/2)**2 + cos(lat1) * cos(lat2) * sin(dlon/2)**2
+    c = 2 * asin(sqrt(a)) 
+    r = 6371 # Radius of earth in kilometers. Use 3956 for miles
+    return c * r
 
 def findplace(request):
     if request.method == 'POST':
