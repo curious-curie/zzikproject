@@ -48,14 +48,14 @@
 
 </div>
 
-<div id="fp_map" style="width: 30%;"></div>
+<div id="map" style="width: 30%; height:350px;"></div>
 
 </div> 
 </body>
 
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=64ecc30ef2f8d205d1168dea4d7ded6d&libraries=services"></script>
 <script>
-var mapContainer = document.getElementById('fp_map'), // 지도를 표시할 div  
+var mapContainer = document.getElementById('map'), // 지도를 표시할 div  
     center_y = {{ places.0.y }}
     center_x = {{ places.0.x }}
     mapOption = { 

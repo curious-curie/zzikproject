@@ -19,6 +19,15 @@
         <input name="password2" type="password" focus = "autofocus" placeholder = "비밀번호를 다시 한번 입력하세요." value "" class = "signup-box__form__input">
      
         <input type="submit" value="회원가입" class = "login-box__form__submit">
+        {% for message in messages %}
+
+                    <div class="alert alert-success">
+                        <a class="close" href="" data-dismiss="alert">×</a>
+
+                        {{ message }}
+
+                    </div>
+            {% endfor %}
     </form>
 
     </div>
