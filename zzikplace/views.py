@@ -160,15 +160,12 @@ def distance(x,y, obj):
 def findplace(request):
     if request.method == 'POST':
         searchword = request.POST['search-word']
-        SearchWord.objects.create(searchword=searchword)
-        searchwords = SearchWord.objects.last()
-        searchplace = searchwords.searchword
-#    return redirect('/reviews/tags/' + str(searchplace))
+  
         places = Place.objects.all()
         tag_places = []
         for place in places:
-            if place.tag_set.filter(name__contains = searchplace):
+            if place.tag_set.filter(name__contains = searchword):
                 tag_places.append(place)
-            elif searchplace in place.address:
+            elif searchword in place.address:
                 tag_places.append(place)
-        return render(request, 'zzikplace/findplace.html', {'searchplace' : searchplace, 'places' : tag_places})
+        return render(request, 'zzikplace/findplace.html', {'searchword' : searchword, 'places' : tag_places})
