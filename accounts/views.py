@@ -1,6 +1,6 @@
 from django.shortcuts import render, render_to_response
 from django.contrib.auth.models import User
-from django.contrib import auth
+from django.contrib import auth, messages
 from django.shortcuts import redirect
 from django import forms
 
@@ -16,7 +16,9 @@ def signup(request):
             user.save()
             return redirect('/reviews')
         else:
-            return render_to_response('template_name', message='비밀번호를 확인해주세요')
+            messages.error(request,'입력하신 비밀번호가 같은지 다시 한번 확인해주세요')
+            #return render_to_response('template_name')
+            return render(request, 'accounts/signup.html')
 
 
     return render(request, 'accounts/signup.html')
@@ -30,7 +32,8 @@ def login(request):
             auth.login(request, user)
             return redirect('/reviews')
         else:
-            return render(request, 'accounts/login.html', {'error' : 'username or password is incorrect'})
+            messages.error(request,'username or password not correct')
+            return render(request, 'accounts/login.html')
     else:
         return render(request, 'accounts/login.html')
 
