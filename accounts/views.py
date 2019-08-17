@@ -7,7 +7,10 @@ def signup(request):
     if request.method  == 'POST':
         if request.POST['password1'] == request.POST['password2']:
             user = User.objects.create_user(username=request.POST['username'], password=request.POST['password1'])
-            # auth.login(request, user)
+            auth.login(request, user)
+            profile = user.profile
+            profile.nickname = request.POST['nickname']
+            user.save()
             return redirect('/reviews')
         else:
             return render_to_response('template_name', message='비밀번호를 확인해주세요')
