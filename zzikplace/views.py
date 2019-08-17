@@ -72,7 +72,12 @@ def add(request, id=None):
 
 def places(request):
     places = Place.objects.all()
-    return render(request, 'zzikplace/places.html', { 'places': places })
+    featured = []
+    for place in places:
+        if place.saved_users.count() > 0:
+            featured.append(place)
+
+    return render(request, 'zzikplace/places.html', { 'places': featured })
 
 def my(request):
     places = Place.objects.filter(saved_users = request.user)

@@ -14,6 +14,10 @@
 
 <body>
 
+<div class="my-button-wrapper">
+<a class="my-button" href="/reviews/my"> 내가 북마크한 장소 </a>
+<a class="my-button selected" href="/reviews/myposts"> 내가 쓴 리뷰 </a>
+</div>
 
 <div style="margin-top: 40px; font-weight:bold; font-size:2rem; color:gray; text-align:center"> 내가 쓴 리뷰 </div>
 <div style="font-weight:bold; font-size:1.5rem; color:gray; text-align:center"> Total :  {{reviews.count}}</div>
@@ -22,7 +26,7 @@
   <div class="item">
    
     <div class="myposts-polaroid">
-    <a href="/places/detail/{{review.place.id}}">
+    <a href="/reviews/detail/{{review.place.id}}">
          <img class="review-img" src = "{{review.photo.url}}">
     </a>
       <div class="caption">

@@ -14,8 +14,12 @@
 
 <body>
 
-<a href="/reviews/myposts"> 내가 쓴 리뷰 </a>
-<div style="margin-top: 40px; font-weight:bold; font-size:2rem; color:gray; text-align:center"> 저장한 장소 목록  </div>
+<div class="my-button-wrapper">
+<a class="my-button selected" href="/reviews/my"> 내가 북마크한 장소 </a>
+<a class="my-button" href="/reviews/myposts"> 내가 쓴 리뷰 </a>
+</div>
+
+<div style="margin-top: 40px; font-weight:bold; font-size:2rem; color:gray; text-align:center"> 내가 북마크한 장소  </div>
 <div style="font-weight:bold; font-size:1.5rem; color:gray; text-align:center"> Total : {{ user.places_saved.count }} </div>
 <div class="wrapper">
 {% for place in places %} 
@@ -31,11 +35,13 @@
     </a>
       <div class="caption">
         <div style="font-weight:bold; font-size:20px;">  {{place.title}}  </div>   
-        <div>  {{place.address}}
+        <div>  {{place.address}} </div>
+        <div style="float:right;">
         <a  href="/reviews/my/{{ place.id }}/delete"  onclick="return confirm('정말 삭제하시겠습니까?')">
         <i class="fas fa-trash-alt fa-lg"></i>
         </a>
         </div>
+        
       </div>
     </div>
   
