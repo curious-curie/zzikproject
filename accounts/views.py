@@ -2,9 +2,12 @@ from django.shortcuts import render, render_to_response
 from django.contrib.auth.models import User
 from django.contrib import auth
 from django.shortcuts import redirect
+from django import forms
 
 def signup(request):
     if request.method  == 'POST':
+        if len(request.POST['password1']) < 6:
+            raise forms.ValidationError("Your password should be at least 6 Characters")
         if request.POST['password1'] == request.POST['password2']:
             user = User.objects.create_user(username=request.POST['username'], password=request.POST['password1'])
             auth.login(request, user)
