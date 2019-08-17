@@ -163,4 +163,12 @@ def findplace(request):
         SearchWord.objects.create(searchword=searchword)
         searchwords = SearchWord.objects.last()
         searchplace = searchwords.searchword
-    return redirect('/reviews/tags/' + str(searchplace))
+#    return redirect('/reviews/tags/' + str(searchplace))
+        places = Place.objects.all()
+        tag_places = []
+        for place in places:
+            if place.tag_set.filter(name__contains = searchplace):
+                tag_places.append(place)
+            elif searchplace in place.address:
+                tag_places.append(place)
+        return render(request, 'zzikplace/findplace.html', {'searchplace' : searchplace, 'places' : tag_places})
