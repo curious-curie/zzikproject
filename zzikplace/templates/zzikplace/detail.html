@@ -57,10 +57,12 @@
 
         <div class="review_infobar">
             <span id="review_number"> 리뷰({{place.review_set.count}}) </span>
+            <span style="float: right; margin: 10px;">
             <select id="sort-select" onchange="location = this.value;">
               <option class="sort-date" value="?sort=recents">최신순</option>
               <option class="sort-likes" value="?sort=likes">좋아요순</option>
             </select>
+            </span>
         </div>
 
         <div class="review_wrapper"> 

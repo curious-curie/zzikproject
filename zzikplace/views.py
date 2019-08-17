@@ -72,7 +72,8 @@ def detail(request, id=None):
         
         if sort == 'likes':
             reviews = Review.objects.filter(place_id=id).order_by('-liked_users', '-created_at')
-            return render(request, 'zzikplace/detail.html', {'place':place, 'timelist': timelist, 'first_around': first_around, 'first_dist': first_dist, 'second_around': second_around, 'second_dist' : second_dist, 'reviews': reviews })
+            reviews_liked = Review.objects.filter(place_id = id).annotate(liked_count = Count('liked_users')).order_by('-liked_count')
+            return render(request, 'zzikplace/detail.html', {'place':place, 'timelist': timelist, 'first_around': first_around, 'first_dist': first_dist, 'second_around': second_around, 'second_dist' : second_dist, 'reviews': reviews_liked })
         else: 
             return render(request, 'zzikplace/detail.html', {'place':place, 'timelist': timelist, 'first_around': first_around, 'first_dist': first_dist, 'second_around': second_around, 'second_dist' : second_dist, 'reviews': reviews })
 
@@ -93,7 +94,7 @@ def places(request):
     #         featured.append(place)
     
     sort = request.GET.get('sort', '')
-    if sort == 'saves':
+    if sort == 'recents':
         # saves = {}
         # saved_list = []
         # for place in places:
@@ -101,14 +102,15 @@ def places(request):
         # saves_dict =  (sorted(saves.items(), key=lambda kv: kv[1], reverse=True))
         # for item in saves_dict:
         #     saved_list.append(item[0])
-        saved_list = Place.objects.annotate(saved_count = Count('saved_users')).order_by('-saved_count')
-        return render(request, 'zzikplace/places.html', { 'places': saved_list })
+        
+        return render(request, 'zzikplace/places.html', { 'places': places })
     elif sort == 'views':
         places = Place.objects.order_by('-place_hit', '-created_at')
 
         return render(request, 'zzikplace/places.html', {'places': places })
     else: 
-        return render(request, 'zzikplace/places.html', { 'places': places })
+        saved_list = Place.objects.annotate(saved_count = Count('saved_users')).order_by('-saved_count')
+        return render(request, 'zzikplace/places.html', { 'places': saved_list })
 
 def my(request):
     places = Place.objects.filter(saved_users = request.user)
