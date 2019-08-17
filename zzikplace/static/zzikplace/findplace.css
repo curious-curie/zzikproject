@@ -1,16 +1,16 @@
-#map {
+/* #map {
     position: fixed;
     top: 80px;
     left: 700px;
     margin-top: 40px;
     border-radius: 30px;
-}
+} */
 
-#fp_map{
+#map{
     position:fixed;
     height: 500px;
-    top: 80px;
-    left: 700px;
+    top: 60px;
+    left: 60%;
     margin-top: 120px;
     border-radius: 30px;
     padding-bottom: 100px;

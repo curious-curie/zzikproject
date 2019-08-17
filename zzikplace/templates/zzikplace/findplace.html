@@ -55,16 +55,12 @@
 
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=64ecc30ef2f8d205d1168dea4d7ded6d&libraries=services"></script>
 <script>
-<<<<<<< HEAD
-var mapContainer = document.getElementById('map'), // 지도를 표시할 div  
+var mapContainer = document.getElementById('fp_map'), // 지도를 표시할 div  
     center_y = {{ places.0.y }}
     center_x = {{ places.0.x }}
-=======
-var mapContainer = document.getElementById('fp_map'), // 지도를 표시할 div  
->>>>>>> 5dbf90b2d4e424563cfdea74a91cf9e150631169
     mapOption = { 
         center: new kakao.maps.LatLng(center_y, center_x), // 지도의 중심좌표
-        level: 3 // 지도의 확대 레벨
+        level: 10 // 지도의 확대 레벨
     };
 
 var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
