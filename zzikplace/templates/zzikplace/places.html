@@ -30,7 +30,11 @@
         <div style="font-weight:bold; font-size:20px;">  {{place.title}}  </div>   
         <div><span> {{place.address}}</span></div>
   
-        <i class="fas fa-trash-alt fa-lg" id="delete"></i>
+        {% if request.user == review.author %}
+         <a href="/reviews/myposts/{{ review.id }}/delete" onclick="return confirm('정말 삭제하시겠습니까?')">
+        <i class="fas fa-trash-alt fa-lg" id="delete"></i></a>
+        {% endif %}
+       
       </div>
     </div>
   

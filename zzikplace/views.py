@@ -9,7 +9,7 @@ def index(request):
     return render(request, 'zzikplace/index.html')
 
 def around(request):
-    return render(request, 'zzikplace/index.html')
+    return render(request, 'zzikplace/around.html')
 
 def new(request):
     return render(request, 'zzikplace/new.html')
@@ -74,7 +74,7 @@ def places(request):
     places = Place.objects.all()
     featured = []
     for place in places:
-        if place.saved_users.count() > 0:
+        # if place.saved_users.count() > 0:
             featured.append(place)
 
     return render(request, 'zzikplace/places.html', { 'places': featured })
