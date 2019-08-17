@@ -3,6 +3,7 @@ from django.shortcuts import redirect
 from django.views.generic.base import TemplateView
 from .models import Place, Review, Like, Save, SearchWord
 from django.contrib.auth.models import User
+from django.db.models import Count
 import math
 
 def index(request):
@@ -72,12 +73,23 @@ def add(request, id=None):
 
 def places(request):
     places = Place.objects.all()
-    featured = []
-    for place in places:
-        # if place.saved_users.count() > 0:
-            featured.append(place)
-
-    return render(request, 'zzikplace/places.html', { 'places': featured })
+    # featured = []
+    # for place in places:
+    #     # if place.saved_users.count() > 0:
+    #         featured.append(place)
+    
+    sort = request.GET.get('sort', '')
+    if sort == 'saves':
+        places = Place.objects.annotate(save_count = Count('saved_users')).order_by('-save_count', '-created_at')
+        return render(request, 'zzikplace/places.html', { 'places': places })
+    elif sort == 'views':
+        places = Place.objects.annotate(views_count = Count('place_hit')).order_by('-views_count', '-created_at')
+        for place in places:
+            print(place.title)
+            print(place.views_count)
+        return render(request, 'zzikplace/places.html', {'places': places })
+    else: 
+        return render(request, 'zzikplace/places.html', { 'places': places })
 
 def my(request):
     places = Place.objects.filter(saved_users = request.user)

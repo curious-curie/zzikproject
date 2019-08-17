@@ -5,6 +5,10 @@
     word-break:break-all;
   }
 
+  #sort-select {
+    float: right;
+    margin: 30px;
+  }
 
   body {
     background-color: whitesmoke;

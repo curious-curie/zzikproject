@@ -14,7 +14,15 @@
 
 <body>
 
+<select id="sort-select" onchange="location = this.value;">
+  <option class="sort-date" value="?sort=recents">최신순</option>
+  <option class="sort-saves" value="?sort=saves">저장순</option>
+  <option class="sort-views" value="?sort=views">조회수순</option>
+</select>
+
+
 <div class="wrapper">
+
 {% for place in places %} 
   <div class="item">
    
@@ -44,7 +52,34 @@
 
 
 </div>
+<script>
+var getUrlParameter = function getUrlParameter(sParam) {
+    var sPageURL = decodeURIComponent(window.location.search.substring(1)),
+        sURLVariables = sPageURL.split('&'),
+        sParameterName,
+        i;
 
+    for (i = 0; i < sURLVariables.length; i++) {
+        sParameterName = sURLVariables[i].split('=');
+
+        if (sParameterName[0] === sParam) {
+            return sParameterName[1] === undefined ? true : sParameterName[1];
+        }
+    }
+};
+// 정렬방식 셀렉트 박스 유지
+$(document).ready(function(){
+  var sort = getUrlParameter('sort');
+  if(sort == 'views'){
+    $('.sort-views').prop('selected', 'selected');
+  }else if(sort == 'saves'){
+    $('.sort-saves').prop('selected', 'selected');
+  }else{
+    $('.sort-date').prop('selected', 'selected')
+  }
+});
+
+</script>
 </body>
 
 
